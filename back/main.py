@@ -1,6 +1,8 @@
 from typing import Union
 from fastapi.responses import FileResponse
 from fastapi import FastAPI
+import funkir as f
+
 
 app = FastAPI()
 favicon_path = 'favicon.ico'
@@ -13,12 +15,6 @@ def read_root():
     return {"Hellossss": "World"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
-
-
-
-
-
-
+@app.get("/løntakari/{starvsfolk_id}")
+def heinta_starvfolk():
+    return f.heinta_starvfolk()
