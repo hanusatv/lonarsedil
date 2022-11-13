@@ -18,3 +18,4 @@ def read_root():
 @app.get("/løntakari/{starvsfolk_id}")
 def heinta_starvfolk():
     return f.heinta_starvfolk()
+
