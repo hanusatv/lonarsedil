@@ -3,75 +3,65 @@
     import { sineInOut, sineIn, sineOut, quadOut } from "svelte/easing";
     let toggle = false;
     let selected;
+    const menuItems = [
+        {
+            name: "users",
+            icon: "/src/assets/icons/users.svg",
+            caption: "Løntakarar",
+        },
+        {
+            name: "company",
+            icon: "/src/assets/icons/company.svg",
+            caption: "Fyritøka",
+        },
+    ];
+
+    function handleClick(itemName) {
+        toggle = false;
+        selected = itemName;
+    }
 </script>
 
-<div class="column-0" class:toggle style:width={toggle ? "15em" : "5em"}>
+<div class="column-0" class:toggle>
     <div
         class="menu-toggle"
         class:toggle
         style:width={toggle ? "13em" : "3em"}
         on:click={() => (toggle = !toggle)}
+        on:keypress={() => (toggle = !toggle)}
     />
     <ul>
-        <li
-            class:active={selected == "users"}
-            on:click={() => (selected = "users")}
-            on:keypress={() => (selected = "users")}
-        >
-            <a href="#">
-                <img
-                    src="/src/assets/icons/users.svg"
-                    alt="users"
-                    class="svg-color"
-                />
-                {#if toggle}
-                    <span
-                        class="text"
-                        class:toggle
-                        in:fly={{
-                            x: -110,
-                            duration: 500,
-                            easing: sineOut,
-                        }}
-                        out:fly={{
-                            x: -110,
-                            duration: 500,
-                            easing: quadOut,
-                        }}>Løntakarar</span
-                    >
-                {/if}
-            </a>
-        </li>
-        <li
-            class:active={selected == "company"}
-            on:click={() => (selected = "company")}
-            on:keypress={() => (selected = "company")}
-        >
-            <a href="#">
-                <img
-                    src="/src/assets/icons/company.svg"
-                    alt="company"
-                    class="svg-color"
-                    class:toggle
-                />
-                {#if toggle}
-                    <span
-                        class="text"
-                        class:toggle
-                        in:fly={{
-                            x: -110,
-                            duration: 500,
-                            easing: sineOut,
-                        }}
-                        out:fly={{
-                            x: -110,
-                            duration: 500,
-                            easing: quadOut,
-                        }}>Fyritøka</span
-                    >
-                {/if}
-            </a>
-        </li>
+        {#each menuItems as menuItem}
+            <li
+                class:active={selected == menuItem.name}
+                on:click={() => handleClick(menuItem.name)}
+                on:keypress={() => (selected = menuItem.name)}
+            >
+                <span class="item-container">
+                    <img
+                        src={menuItem.icon}
+                        alt={menuItem.icon}
+                        class="svg-color"
+                    />
+                    {#if toggle}
+                        <span
+                            class="text"
+                            class:toggle
+                            in:fly={{
+                                x: -110,
+                                duration: 500,
+                                easing: sineOut,
+                            }}
+                            out:fly={{
+                                x: -110,
+                                duration: 500,
+                                easing: quadOut,
+                            }}>{menuItem.caption}</span
+                        >
+                    {/if}
+                </span>
+            </li>
+        {/each}
     </ul>
 </div>
 
@@ -81,7 +71,14 @@
         height: 100%;
         width: 5em;
         transition: 0.5s;
+        transition-timing-function: width ease;
     }
+
+    .column-0.toggle {
+        width: 15em;
+    }
+
+    /* Start of menu toggler */
 
     .menu-toggle {
         display: flex;
@@ -106,6 +103,7 @@
     .toggle.menu-toggle::before {
         transform: translateY(2em) rotate(45deg);
     }
+
     .menu-toggle::after {
         position: absolute;
         content: "";
@@ -122,32 +120,94 @@
         box-shadow: none;
     }
 
+    /* End of menu toggler */
+
+    /* Start of navigation items */
+
     ul {
-        padding: 1em;
+        position: absolute;
+        padding: 0;
         display: flex;
         flex-direction: column;
         gap: 2em;
     }
 
     li {
+        position: relative;
         list-style: none;
         width: 3em;
-        border: 1em solid red;
+        border: 1em solid transparent;
         border-radius: 1em;
         transition: 0.5s;
     }
 
+    li::before {
+        content: " ";
+        position: absolute;
+        top: -2em;
+        left: 4em;
+        background: transparent;
+        width: 1em;
+        height: 1em;
+        transition: 0.5s;
+        transition-timing-function: ease;
+    }
+
+    li::after {
+        content: " ";
+        position: absolute;
+        top: 4em;
+        left: 4em;
+        background: transparent;
+        width: 1em;
+        height: 1em;
+        transition: 0.5s;
+        transition-timing-function: ease;
+    }
+
+    /* End of navigation items */
+
+    /* Start of navigation items toggled */
+    .toggle li::before,
+    .toggle li::after {
+        transform: translateX(10em);
+    }
+
+    /* End of navigation items toggled */
+
     .active {
         transform: translateX(2em);
         border-color: var(--background-color);
+        border-radius: 1em 0 0 1em;
         background-color: var(--background-color);
+        transition: 0.5s;
     }
 
-    a {
+    li.active::before {
+        left: 1em;
+        border-bottom-right-radius: 1em;
+        box-shadow: 0.2em 0.2em 0px 0.2em var(--background-color);
+    }
+
+    li.active::after {
+        left: 1em;
+        border-top-right-radius: 1em;
+        box-shadow: 0.2em -0.2em 0px 0.2em var(--background-color);
+    }
+
+    .toggle .active {
+        padding-right: 8em;
+    }
+
+    .item-container {
         display: flex;
         align-items: center;
         gap: 2em;
         font-weight: bold;
+    }
+
+    .item-container:hover {
+        cursor: pointer;
     }
 
     .svg-color {
