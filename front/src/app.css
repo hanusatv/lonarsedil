@@ -85,18 +85,3 @@ header {
   filter: var(--svg-lines-color) drop-shadow(0 0 0.1em var(--hover-color));
   transition: 0.2s;
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
-}
