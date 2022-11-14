@@ -14,7 +14,8 @@ function loadTable() {
           trHTML += '<td>'+object['Aldur']+'</td>';
           trHTML += '<td>'+object['Gøta']+'</td>';
           trHTML += '<td>'+object['Bydur']+'</td>';
-          trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox('+object['_id']+')">Dagfør</button>';
+          //trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox('+object['_id']+')">Dagfør</button>';
+          trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="consolelogTest('+object['_id']+')">Dagfør</button>';
           trHTML += '<button type="button" class="btn btn-outline-danger" onclick="userDelete('+object['_id']+')">Strika</button></td>';
           trHTML += "</tr>";
         }
@@ -24,6 +25,10 @@ function loadTable() {
   }
   
 loadTable();
+
+function consolelogTest(ids) {
+  console.log(ids)
+}
 
 function showUserCreateBox() {
   Swal.fire({
