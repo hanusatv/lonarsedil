@@ -2,15 +2,15 @@
     import { fly } from "svelte/transition";
     import { sineInOut, sineIn, sineOut, quadOut } from "svelte/easing";
     let toggle = false;
-    let selected;
+    export let selected;
     const menuItems = [
         {
-            name: "users",
+            name: "lontakarar",
             icon: "/src/assets/icons/users.svg",
             caption: "Løntakarar",
         },
         {
-            name: "company",
+            name: "fyritoka",
             icon: "/src/assets/icons/company.svg",
             caption: "Fyritøka",
         },
@@ -32,35 +32,37 @@
     />
     <ul>
         {#each menuItems as menuItem}
-            <li
-                class:active={selected == menuItem.name}
-                on:click={() => handleClick(menuItem.name)}
-                on:keypress={() => (selected = menuItem.name)}
-            >
-                <span class="item-container">
-                    <img
-                        src={menuItem.icon}
-                        alt={menuItem.icon}
-                        class="svg-color"
-                    />
-                    {#if toggle}
-                        <span
-                            class="text"
-                            class:toggle
-                            in:fly={{
-                                x: -110,
-                                duration: 500,
-                                easing: sineOut,
-                            }}
-                            out:fly={{
-                                x: -110,
-                                duration: 500,
-                                easing: quadOut,
-                            }}>{menuItem.caption}</span
-                        >
-                    {/if}
-                </span>
-            </li>
+            <a href="/#/{menuItem.name}">
+                <li
+                    class:active={selected == menuItem.name}
+                    on:click={() => handleClick(menuItem.name)}
+                    on:keypress={() => (selected = menuItem.name)}
+                >
+                    <span class="item-container">
+                        <img
+                            src={menuItem.icon}
+                            alt={menuItem.icon}
+                            class="svg-color"
+                        />
+                        {#if toggle}
+                            <span
+                                class="text"
+                                class:toggle
+                                in:fly={{
+                                    x: -110,
+                                    duration: 500,
+                                    easing: sineOut,
+                                }}
+                                out:fly={{
+                                    x: -110,
+                                    duration: 500,
+                                    easing: quadOut,
+                                }}>{menuItem.caption}</span
+                            >
+                        {/if}
+                    </span>
+                </li>
+            </a>
         {/each}
     </ul>
 </div>
@@ -208,14 +210,5 @@
 
     .item-container:hover {
         cursor: pointer;
-    }
-
-    .svg-color {
-        filter: var(--svg-lines-color);
-    }
-
-    .svg-color:hover {
-        filter: var(--svg-lines-color) drop-shadow(0 0 0.1em var(--hover-color));
-        transition: 0.2s;
     }
 </style>

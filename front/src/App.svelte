@@ -1,5 +1,15 @@
 <script>
+  import Router from "svelte-spa-router";
   import Navigationbar from "./elements/Navigationbar.svelte";
+  import Fyritoka from "./routes/Fyritoka.svelte";
+  import Home from "./routes/Home.svelte";
+  import Lontakarar from "./routes/Lontakarar.svelte";
+
+  let routes = {
+    "/": Home,
+    "/lontakarar": Lontakarar,
+    "/fyritoka": Fyritoka,
+  };
 </script>
 
 <div class="header-container">
@@ -7,7 +17,11 @@
 </div>
 <div class="columns-container">
   <Navigationbar />
-  <div class="column-1">column-1</div>
+  <div class="column-1">
+    <main>
+      <Router {routes} />
+    </main>
+  </div>
 </div>
 
 <style>
@@ -28,5 +42,10 @@
     justify-content: flex-start;
     height: 100%;
     width: 100%;
+  }
+
+  .column-1 {
+    flex-grow: 1;
+    margin: 2em 5em;
   }
 </style>

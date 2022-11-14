@@ -11,6 +11,8 @@
   --primary-color: #363644;
   --lines-color: #acadc5;
   --hover-color: #bbbddd;
+  --green-color: #466a50;
+  --hover-green-color: #577c61;
   --svg-lines-color: invert(68%) sepia(2%) saturate(1868%) hue-rotate(200deg) brightness(102%) contrast(90%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -73,6 +75,15 @@ button:focus-visible {
 header {
   margin: 0;
   padding: 0;
+}
+
+.svg-color {
+  filter: var(--svg-lines-color);
+}
+
+.svg-color:hover {
+  filter: var(--svg-lines-color) drop-shadow(0 0 0.1em var(--hover-color));
+  transition: 0.2s;
 }
 
 @media (prefers-color-scheme: light) {
