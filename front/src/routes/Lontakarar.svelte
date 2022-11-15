@@ -1,19 +1,13 @@
 <script>
     import LontakariListBox from "../elements/LontakariListBox.svelte";
+    let lonarfolk2 = [];
+    const HeintaOllLonarFolk = (async () => {
+            const response = await fetch('http://127.0.0.1:8000/lontakari/');
+            lonarfolk2 = await response.json();
+        return await response.json()
+	})();
 
-    let lonarfolk = [];
-    async function HeintaOllLonarFolk() {
-		const res = await fetch(`http://127.0.0.1:8000/lontakari/`);
-        lonarfolk = await res.json();
-		if (res.ok) {
-			return lonarfolk;
-		} else {
-			throw new Error(lonarfolk);
-		}
-	}
-    HeintaOllLonarFolk();
-    const tableHeading = ["_id", "Navn", "Aldur", "Gøta","Býður"];
-    
+    const tableHeading = ["ID", "Fyritøka", "Navn", "Aldur", "Gøta", "Býður"];    
 </script>
 <ul class="employee-list">
     <li class="new employee-list-item">
@@ -24,25 +18,41 @@
         />
     </li>
     <!-- koda her -->
-    <tr>
-        {#each tableHeading as heading}
-          <th>{heading}</th>
-        {/each}
-    </tr>
-    
-    
-    {#each lonarfolk as eittlonarfolk}
-      <tr>
-        <th scope="row">{eittlonarfolk._id}</th>
-        <td>{eittlonarfolk.Navn}</td>
-        <td>{eittlonarfolk.Aldur}</td>
-        <td>{eittlonarfolk.Gøta}</td>
-        <td>{eittlonarfolk.Býður}</td>
-      </tr>
-    {/each}
+    <div>
+        <tr>
+            {#each tableHeading as heading}
+                <th>{heading}</th>
+            {/each}
+        </tr>
+
+        {#await lonarfolk2}
+            {#each Array(5) as _}
+            <li>
+                <LontakariListBox />
+            </li>
+            {/each}
+        {:then lonarfolk2}
+            {#each lonarfolk2 as eittlonarfolk}
+            <tr>
+                <th scope="row">{eittlonarfolk._id}</th>
+                <td>{eittlonarfolk.Fyritoka}</td>
+                <td>{eittlonarfolk.Navn}</td>
+                <td>{eittlonarfolk.Aldur}</td>
+                <td>{eittlonarfolk.Gøta}</td>
+                <td>{eittlonarfolk.Bydur}</td>
+                <button class="row-button">Broyt</button>
+            </tr>
+            {/each}
+        {:catch error}
+            <p>An error occurred!</p>
+        {/await}
+    </div>
 </ul>
 
 <style>
+    .row-button {
+        color: red;
+    }
     .employee-list {
         display: flex;
         flex-direction: column;
@@ -75,8 +85,5 @@
         margin: auto;
         width: 2em;
         height: 2em;
-    }
-    td {
-        
     }
 </style>
