@@ -1,3 +1,8 @@
+<script>
+    import { each } from "svelte/internal";
+    import LontakariListBox from "../elements/LontakariListBox.svelte";
+</script>
+
 <ul class="employee-list">
     <li class="new employee-list-item">
         <img
@@ -6,6 +11,11 @@
             alt="New"
         />
     </li>
+    {#each Array(5) as _}
+        <li>
+            <LontakariListBox />
+        </li>
+    {/each}
 </ul>
 
 <style>

@@ -5,7 +5,7 @@ with open('../.secrets.yaml') as f:
     bindingarstrongur = data["DatabaseConnectionString"]
 
 cluster = MongoClient(bindingarstrongur)
-#Create/connect to database
+# Create/connect to database
 mydb = cluster["Fyritoka"]
-#connect to collection
+# connect to collection
 collection = mydb["Fyritoka"]
