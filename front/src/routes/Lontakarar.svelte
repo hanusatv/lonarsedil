@@ -1,5 +1,6 @@
 <script>
-    
+    import LontakariListBox from "../elements/LontakariListBox.svelte";
+
     let lonarfolk = [];
     async function HeintaOllLonarFolk() {
 		const res = await fetch(`http://127.0.0.1:8000/lontakari/`);
@@ -12,7 +13,7 @@
 	}
     HeintaOllLonarFolk();
     const tableHeading = ["_id", "Navn", "Aldur", "Gøta","Býður"];
-
+    
 </script>
 <ul class="employee-list">
     <li class="new employee-list-item">
@@ -28,6 +29,8 @@
           <th>{heading}</th>
         {/each}
     </tr>
+    
+    
     {#each lonarfolk as eittlonarfolk}
       <tr>
         <th scope="row">{eittlonarfolk._id}</th>
