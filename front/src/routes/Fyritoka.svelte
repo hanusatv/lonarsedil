@@ -1,6 +1,6 @@
 <script>
     import LontakariListBox from "../elements/LontakariListBox.svelte";
-    import { selectedRoute } from "/src/stores/store.js";
+    import { selectedRoute } from "../stores/store.js";
     selectedRoute.set("fyritoka");
 
     let lonarfolk2 = [];
@@ -75,7 +75,6 @@
     }
 
     ul {
-        list-style: none;
         padding: 0;
         margin: 0;
     }

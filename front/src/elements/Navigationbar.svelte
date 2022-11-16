@@ -1,7 +1,7 @@
 <script>
     import { fly } from "svelte/transition";
     import { sineOut, quadOut } from "svelte/easing";
-    import { selectedRoute } from "/src/stores/store.js";
+    import { selectedRoute } from "../stores/store.js";
     import { subscribe } from "svelte/internal";
     let toggle = false;
     let selected;
@@ -36,14 +36,14 @@
         on:click={() => (toggle = !toggle)}
         on:keypress={() => (toggle = !toggle)}
     />
-    <ul>
+    <ul class="items-container">
         {#each menuItems as menuItem}
-            <a href="/#/{menuItem.name}">
-                <li
-                    class:active={selected == menuItem.name}
-                    on:click={() => handleClick(menuItem.name)}
-                    on:keypress={() => (selected = menuItem.name)}
-                >
+            <a
+                href="/#/{menuItem.name}"
+                on:click={() => handleClick(menuItem.name)}
+                on:keypress={() => (selected = menuItem.name)}
+            >
+                <li class:active={selected == menuItem.name}>
                     <span class="item-container">
                         <img
                             src={menuItem.icon}
@@ -132,7 +132,8 @@
 
     /* Start of navigation items */
 
-    ul {
+    .items-container {
+        margin-top: 1em;
         position: absolute;
         padding: 0;
         display: flex;
@@ -142,7 +143,6 @@
 
     li {
         position: relative;
-        list-style: none;
         width: 3em;
         border: 1em solid transparent;
         border-radius: 1em;

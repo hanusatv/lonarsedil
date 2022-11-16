@@ -1,70 +1,62 @@
 <script>
     import LontakariListBox from "../elements/LontakariListBox.svelte";
-    import { selectedRoute } from "/src/stores/store.js";
+    import { selectedRoute } from "../stores/store.js";
     selectedRoute.set("lontakarar");
 
-    let lonarfolk2 = [];
-    const HeintaOllLonarFolk = (async () => {
-        const response = await fetch("http://127.0.0.1:8000/lontakari/");
-        lonarfolk2 = await response.json();
+    const fetchLonarfolk = (async () => {
+        const response = await fetch("http://localhost:8000/lontakari/");
         return await response.json();
     })();
-
-    const tableHeading = ["ID", "Fyritøka", "Navn", "Aldur", "Gøta", "Býður"];
 </script>
 
-<ul class="employee-list">
-    <li class="new employee-list-item">
-        <img
-            class="svg-icon svg-color"
-            src="/src/assets/icons/new-pluss.svg"
-            alt="New"
-        />
-    </li>
-    <!-- koda her -->
-    <div>
-        <tr>
-            {#each tableHeading as heading}
-                <th>{heading}</th>
-            {/each}
-        </tr>
+<button class="new">
+    <img
+        class="svg-icon svg-color"
+        src="/src/assets/icons/person-add.svg"
+        alt="New"
+    />
+</button>
 
-        {#await lonarfolk2}
+<!-- koda her -->
+<div class="employee-list-container">
+    <ul class="employee-list">
+        {#await fetchLonarfolk}
             {#each Array(5) as _}
                 <li>
                     <LontakariListBox />
                 </li>
             {/each}
-        {:then lonarfolk2}
-            {#each lonarfolk2 as eittlonarfolk}
-                <tr>
-                    <th scope="row">{eittlonarfolk._id}</th>
-                    <td>{eittlonarfolk.Fyritoka}</td>
-                    <td>{eittlonarfolk.Navn}</td>
-                    <td>{eittlonarfolk.Aldur}</td>
-                    <td>{eittlonarfolk.Gøta}</td>
-                    <td>{eittlonarfolk.Bydur}</td>
-                    <button class="row-button">Broyt</button>
-                </tr>
+        {:then lonarfolk}
+            {#each lonarfolk as eittlonarfolk}
+                <div class="employee-row">
+                    <span class="employee-name">
+                        <a href="#">
+                            {eittlonarfolk.Navn}
+                        </a>
+                    </span>
+                    <button class="employee-button">
+                        <img
+                            class="svg-icon svg-color"
+                            src="/src/assets/icons/create.svg"
+                            alt="edit"
+                        />
+                    </button>
+                </div>
             {/each}
         {:catch error}
             <p>An error occurred!</p>
         {/await}
-    </div>
-</ul>
+    </ul>
+</div>
 
 <style>
-    .row-button {
-        color: red;
-    }
-    .employee-list {
-        display: flex;
-        flex-direction: column;
-    }
-
     .new {
         background-color: var(--green-color);
         transition: background-color 0.2s;
+        height: 3em;
+        width: 100%;
+        border-radius: 1em;
+        display: flex;
     }
 
     .new:hover {
@@ -72,17 +64,29 @@
         background-color: var(--hover-green-color);
     }
 
-    .employee-list-item {
-        height: 3em;
-        width: 100%;
-        border-radius: 1em;
-        display: flex;
+    .employee-list-container {
+        margin-top: 2em;
     }
 
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+    .employee-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .employee-row {
+        display: flex;
+        height: 3em;
+        border-bottom: 1px solid var(--lines-color);
+    }
+
+    .employee-name {
+        flex-grow: 1;
+        align-self: center;
+        text-align: left;
+    }
+
+    .employee-button {
+        background-color: transparent;
     }
 
     .svg-icon {
