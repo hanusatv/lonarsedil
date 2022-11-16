@@ -1,14 +1,18 @@
 <script>
     import LontakariListBox from "../elements/LontakariListBox.svelte";
+    import { selectedRoute } from "/src/stores/store.js";
+    selectedRoute.set("lontakarar");
+
     let lonarfolk2 = [];
     const HeintaOllLonarFolk = (async () => {
-            const response = await fetch('http://127.0.0.1:8000/lontakari/');
-            lonarfolk2 = await response.json();
-        return await response.json()
-	})();
+        const response = await fetch("http://127.0.0.1:8000/lontakari/");
+        lonarfolk2 = await response.json();
+        return await response.json();
+    })();
 
-    const tableHeading = ["ID", "Fyritøka", "Navn", "Aldur", "Gøta", "Býður"];    
+    const tableHeading = ["ID", "Fyritøka", "Navn", "Aldur", "Gøta", "Býður"];
 </script>
+
 <ul class="employee-list">
     <li class="new employee-list-item">
         <img
@@ -27,21 +31,21 @@
 
         {#await lonarfolk2}
             {#each Array(5) as _}
-            <li>
-                <LontakariListBox />
-            </li>
+                <li>
+                    <LontakariListBox />
+                </li>
             {/each}
         {:then lonarfolk2}
             {#each lonarfolk2 as eittlonarfolk}
-            <tr>
-                <th scope="row">{eittlonarfolk._id}</th>
-                <td>{eittlonarfolk.Fyritoka}</td>
-                <td>{eittlonarfolk.Navn}</td>
-                <td>{eittlonarfolk.Aldur}</td>
-                <td>{eittlonarfolk.Gøta}</td>
-                <td>{eittlonarfolk.Bydur}</td>
-                <button class="row-button">Broyt</button>
-            </tr>
+                <tr>
+                    <th scope="row">{eittlonarfolk._id}</th>
+                    <td>{eittlonarfolk.Fyritoka}</td>
+                    <td>{eittlonarfolk.Navn}</td>
+                    <td>{eittlonarfolk.Aldur}</td>
+                    <td>{eittlonarfolk.Gøta}</td>
+                    <td>{eittlonarfolk.Bydur}</td>
+                    <button class="row-button">Broyt</button>
+                </tr>
             {/each}
         {:catch error}
             <p>An error occurred!</p>

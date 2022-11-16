@@ -1,8 +1,14 @@
 <script>
     import { fly } from "svelte/transition";
-    import { sineInOut, sineIn, sineOut, quadOut } from "svelte/easing";
+    import { sineOut, quadOut } from "svelte/easing";
+    import { selectedRoute } from "/src/stores/store.js";
+    import { subscribe } from "svelte/internal";
     let toggle = false;
-    export let selected;
+    let selected;
+    selectedRoute.subscribe((route) => {
+        selected = route;
+    });
+
     const menuItems = [
         {
             name: "lontakarar",
@@ -18,7 +24,7 @@
 
     function handleClick(itemName) {
         toggle = false;
-        selected = itemName;
+        selectedRoute.set(itemName);
     }
 </script>
 
