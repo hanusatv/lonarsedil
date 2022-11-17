@@ -35,11 +35,13 @@
                         </a>
                     </span>
                     <button class="employee-button">
-                        <img
-                            class="svg-icon svg-color"
-                            src="/src/assets/icons/create.svg"
-                            alt="edit"
-                        />
+                        <a href="http://localhost:5173/#/lontakari/{eittlonarfolk._id}">
+                            <img
+                                class="svg-icon svg-color"
+                                src="/src/assets/icons/create.svg"
+                                alt="edit"
+                            />
+                        </a>
                     </button>
                 </div>
             {/each}

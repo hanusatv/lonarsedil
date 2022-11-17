@@ -4,12 +4,15 @@
   import Fyritoka from "./routes/Fyritoka.svelte";
   import Home from "./routes/Home.svelte";
   import Lontakarar from "./routes/Lontakarar.svelte";
+  import Lontakari from "./routes/Lontakari.svelte"
 
   let routes = {
     "/": Home,
     "/lontakarar": Lontakarar,
     "/fyritoka": Fyritoka,
+    "/lontakari/:id": Lontakari
   };
+
 </script>
 
 <div class="header-container">
