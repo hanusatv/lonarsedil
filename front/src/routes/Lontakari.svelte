@@ -138,8 +138,7 @@ h1 {
 /* Button Lonar tittleiki Start */
 .lonar-tittleiki-dropdown,
 .lonar-tittleiki-dropdown * {
-  margin: 0;
-  padding: 0;
+
   position: relative;
   box-sizing: border-box;
   color: white;
@@ -147,8 +146,6 @@ h1 {
 .lonar-tittleiki-dropdown {
 
   position: relative;
-  margin-left: 35%;
-  margin-right: 35%;
   background-color: #2b3044;
   border-radius: 4px;
 }
@@ -210,6 +207,8 @@ background: var(--btn, var(--background));
 box-shadow: 0 var(--shadow-y, 4px) var(--shadow-blur, 8px) var(--shadow);
 transform: scale(var(--scale, 1));
 transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+margin-top: 40px;
+float: right;
 }
 .button span {
 display: block;
