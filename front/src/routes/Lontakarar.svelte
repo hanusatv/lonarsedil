@@ -30,7 +30,7 @@
             {#each lonarfolk as eittlonarfolk}
                 <div class="employee-row">
                     <span class="employee-name">
-                        <a href="#">
+                        <a href="http://localhost:5173/#/lontakari/{eittlonarfolk._id}">
                             {eittlonarfolk.Navn}
                         </a>
                     </span>
