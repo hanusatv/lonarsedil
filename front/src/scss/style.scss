@@ -1,0 +1,26 @@
+// @import "~bootstrap/scss/bootstrap";
+
+// Custom.scss
+// Option B: Include parts of Bootstrap
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "/node_modules/bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+
+$body-bg: #282933;
+$body-color: white;
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "/node_modules/bootstrap/scss/variables";
+
+// 4. Include any default map overrides here
+
+// 5. Include remainder of required parts
+@import "/node_modules/bootstrap/scss/maps";
+@import "/node_modules/bootstrap/scss/mixins";
+@import "/node_modules/bootstrap/scss/root";
+
+// 6. Optionally include any other parts as needed
+@import "node_modules/bootstrap/scss/forms";
+@import "node_modules/bootstrap/scss/reboot";

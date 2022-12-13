@@ -74,6 +74,9 @@
 </div>
 
 <style>
+    * {
+        box-sizing: content-box;
+    }
     .column-0 {
         background-color: var(--primary-color);
         height: 100%;

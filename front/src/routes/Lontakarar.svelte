@@ -1,4 +1,5 @@
 <script>
+    import "animate.css";
     import LontakariListBox from "../elements/LontakariListBox.svelte";
     import { selectedRoute } from "../stores/store.js";
     selectedRoute.set("lontakarar");
@@ -28,14 +29,18 @@
             {/each}
         {:then lonarfolk}
             {#each lonarfolk as eittlonarfolk}
-                <div class="employee-row">
+                <div class="employee-row" id={eittlonarfolk._id}>
                     <span class="employee-name">
-                        <a href="http://localhost:5173/#/lontakari/{eittlonarfolk._id}">
+                        <a
+                            href="http://localhost:5173/#/lontakari/{eittlonarfolk._id}"
+                        >
                             {eittlonarfolk.Navn}
                         </a>
                     </span>
                     <button class="employee-button">
-                        <a href="http://localhost:5173/#/lontakari/{eittlonarfolk._id}">
+                        <a
+                            href="http://localhost:5173/#/lontakari/{eittlonarfolk._id}"
+                        >
                             <img
                                 class="svg-icon svg-color"
                                 src="/src/assets/icons/create.svg"
@@ -79,6 +84,9 @@
         display: flex;
         height: 3em;
         border-bottom: 1px solid var(--lines-color);
+    }
+
+    .employee-row.selected {
     }
 
     .employee-name {
