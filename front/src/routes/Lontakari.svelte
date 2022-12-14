@@ -2,7 +2,6 @@
     import { selectedRoute } from "../stores/store.js";
     selectedRoute.set("lontakarar");
     import SveltyPicker from "svelty-picker";
-    let myDate;
     export let params;
 
     async function heintaLonarfolk() {
@@ -36,111 +35,151 @@
     {#await promise}
         <p>Bíða...</p>
     {:then lonarfolk}
-        <!-- Løntakara Info -->
-        <div class="lontakari-tabel">
-            <div class="employees-single-employment-tab">
-                <div class="ant-card-body">
-                    <div class="ant-row">
-                        <!-- Header -->
-                        <h1 class="h1">{lonarfolk.Navn}</h1>
-                        <!-- Body1 -->
-                        <form class="body">
-                            <div class="form-floating mb-3">
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="floatingInput"
-                                    placeholder="navn@dømi.fo"
-                                    value={lonarfolk.Mail}
-                                />
-                                <label for="floatingInput">Teldupostur</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="floatingInput"
-                                    placeholder="Tinghúsvegur 1"
-                                    value={lonarfolk.Bustadur}
-                                />
-                                <label for="floatingInput">Gøtunavn</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="floatingInput"
-                                    placeholder="Tórshavn"
-                                    value={lonarfolk.Bydur}
-                                />
-                                <label for="floatingInput">Býur</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="floatingInput"
-                                    placeholder="311234"
-                                    value={lonarfolk.Telefon}
-                                />
-                                <label for="floatingInput">Telefon nummar</label
-                                >
-                            </div>
-                            <div class="form-floating mb-3">
-                                <SveltyPicker
-                                    inputClasses="form-control"
-                                    inputId="floatingInput"
-                                    format="dd-mm-yyyy"
-                                    placeholder=" "
-                                    todayBtn={false}
-                                    clearBtn={false}
-                                    bind:value={myDate}
-                                />
-                                <label for="floatingInput">Føðingardagur</label>
-                            </div>
-                        </form>
-                        <!-- Body 2 -->
-                        <div class="body">
-                            <div class="lontakari-info">
-                                P-Tal:<br />
-                                <strong>{lonarfolk.Ptal}</strong>
-                            </div>
-                            <div class="lontakari-info">
-                                Starvsetanardagur:<br />
-                                <strong>{lonarfolk.Starvsetanardagur}</strong>
-                            </div>
-                            <div class="lontakari-info">
-                                Slag av inntøku:<br />
-                                <strong>{lonarfolk.Slagavinntøku}</strong>
-                            </div>
-                            <div class="lontakari-info">
-                                Løn brutto:<br />
-                                <strong>{lonarfolk.Løn}</strong>
-                            </div>
-                            <div class="lontakari-info">
-                                Rest feria:<br />
-                                <strong>{lonarfolk.Restferia} dagar</strong>
-                            </div>
-                            <label
-                                class="lontakari-info"
-                                for="lonar-tittleiki-dropdown"
-                                >Lønar títtleiki:</label
-                            >
-                            <div class="lonar-tittleiki-dropdown">
-                                <select>
-                                    <option value="Option 1">Hvønn mánað</option
-                                    >
-                                    <option value="Option 2"
-                                        >Aðra hvørja viku</option
-                                    >
-                                    <option value="Option 3">Hvørja viku</option
-                                    >
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <h1>{lonarfolk.Navn}</h1>
+        <!-- Body1 -->
+        <h2 class="input-group-heading">Adressa</h2>
+        <hr />
+        <form class="sub-group">
+            <!-- Gøta -->
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Tinghúsvegur 1"
+                    value={lonarfolk.Bustadur}
+                />
+                <label for="floatingInput">Gøtunavn</label>
             </div>
+            <!-- Býur -->
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Tórshavn"
+                    value={lonarfolk.Bydur}
+                />
+                <label for="floatingInput">Býur</label>
+            </div>
+            <!-- Postnummar -->
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="100"
+                    value="Post koda"
+                />
+                <label for="floatingInput">Postnummar</label>
+            </div>
+            <!-- Land -->
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Føroyar"
+                    value="Frøbjar"
+                />
+                <label for="floatingInput">Land</label>
+            </div>
+        </form>
+        <!-- Body 2 -->
+        <h2 class="input-group-heading">Kontakt</h2>
+        <hr />
+        <div class="sub-group">
+            <!-- Teldupostur -->
+            <div class="form-floating">
+                <input
+                    type="email"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="navn@dømi.fo"
+                    value={lonarfolk.Mail}
+                />
+                <label for="floatingInput">Teldupostur</label>
+            </div>
+            <!-- Telefon nummar -->
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="311234"
+                    value={lonarfolk.Telefon}
+                />
+                <label for="floatingInput">Telefon nummar</label>
+            </div>
+        </div>
+        <h2 class="input-group-heading">Persónsupplýsingar</h2>
+        <hr />
+        <div class="sub-group">
+            <!-- Navn -->
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="311234"
+                    value={lonarfolk.Navn}
+                />
+                <label for="floatingInput">Navn</label>
+            </div>
+            <div class="form-floating">
+                <SveltyPicker
+                    inputClasses="form-control"
+                    inputId="floatingInput"
+                    format="dd-mm-yyyy"
+                    placeholder=" "
+                    todayBtn={false}
+                    clearBtn={false}
+                />
+                <label for="floatingInput">Føðingardagur</label>
+            </div>
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="311234"
+                    value={lonarfolk.Ptal}
+                />
+                <label for="floatingInput">P-tal</label>
+            </div>
+            <div class="form-floating">
+                <SveltyPicker
+                    inputClasses="form-control"
+                    inputId="floatingInput"
+                    format="dd-mm-yyyy"
+                    placeholder=" "
+                    todayBtn={false}
+                    clearBtn={false}
+                />
+                <label for="floatingInput">Setanardagur</label>
+            </div>
+        </div>
+        <div class="lontakari-info">
+            Slag av inntøku:<br />
+            <strong>{lonarfolk.Slagavinntøku}</strong>
+        </div>
+        <div class="lontakari-info">
+            Løn brutto:<br />
+            <strong>{lonarfolk.Løn}</strong>
+        </div>
+        <div class="lontakari-info">
+            Rest feria:<br />
+            <strong>{lonarfolk.Restferia} dagar</strong>
+        </div>
+        <label class="lontakari-info" for="lonar-tittleiki-dropdown"
+            >Lønar títtleiki:</label
+        >
+        <div class="lonar-tittleiki-dropdown">
+            <select>
+                <option value="Option 1">Hvønn mánað</option>
+                <option value="Option 2">Aðra hvørja viku</option>
+                <option value="Option 3">Hvørja viku</option>
+            </select>
         </div>
         <!-- Footer -->
         <div class="buttom-buttons-row">
@@ -165,11 +204,19 @@
 </main>
 
 <style>
-    .body {
+    .input-group-heading {
+        text-align: left;
+    }
+
+    hr {
+        margin-top: 0;
+    }
+    .sub-group {
         display: flex;
         flex-wrap: wrap;
         row-gap: 10px;
         column-gap: 2em;
+        margin-bottom: 2em;
     }
     .lontakari-info {
         margin: 10px;

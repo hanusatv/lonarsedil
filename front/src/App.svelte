@@ -48,6 +48,7 @@
 
   .column-1 {
     flex-grow: 1;
-    margin: 2em 5em;
+    padding: 2em 5em;
+    overflow: auto;
   }
 </style>

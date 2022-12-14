@@ -86,9 +86,6 @@
         border-bottom: 1px solid var(--lines-color);
     }
 
-    .employee-row.selected {
-    }
-
     .employee-name {
         flex-grow: 1;
         align-self: center;
