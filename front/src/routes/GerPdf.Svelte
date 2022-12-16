@@ -2,15 +2,21 @@
     import { Tabs, Tab, TabList, TabPanel } from 'svelte-tabs';
     import SveltyPicker from "svelty-picker";
     import pdfMake from "pdfmake/build/pdfmake";
-    import PdfHeader from '../components/lonarsedil/header.svelte';
+    import PdfHeader from '../components/lonarsedil/Header.svelte';
     import PdfBody from '../components/lonarsedil/Body.svelte';
     import PdfFooter from '../components/lonarsedil/Footer.svelte';
     import { user} from "../stores/store.js";
 
     
     let lonarfolk = JSON.parse(sessionStorage.getItem("Lonarfolk"));
+    lonarfolk.Yvirskrift = "Lønarseðil";
+    lonarfolk.FyritokaAdressa = "Postboks 1059";
+    lonarfolk.FyritokaPostBydur = "110 Tórshavn";
+    lonarfolk.FyritokaTelefon = "Tlf. 316767";
+    lonarfolk.FyritokaEmail = "Lønarseðil@Lønarseðil.fo";
 
     user.set(lonarfolk);
+    
 
     function handleChange() {
         // sessionStorage.setItem("Lonarfolk",JSON.stringify(lonarfolk));
@@ -29,6 +35,18 @@
         
             <TabPanel>
                 <h2>Persónsupplýsingar</h2>
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="311234"
+                        bind:value={lonarfolk.Yvirskrift}
+                        on:keyup={handleChange}
+                        on:change={handleChange}
+                    />
+                    <label for="floatingInput">Yvirskrift</label>
+                </div>
                 <div class="form-floating">
                     <input
                         type="text"
@@ -125,20 +143,7 @@
                     />
                     <label for="floatingInput">Text8</label>
                 </div>
-                <div class="form-floating">
-                    <SveltyPicker
-                        inputClasses="form-control"
-                        inputId="floatingInput"
-                        format="dd-mm-yyyy"
-                        placeholder=" "
-                        todayBtn={false}
-                        clearBtn={false}
-                        bind:value={lonarfolk.Fødingardagur}
-                        on:keyup={handleChange}
-                        on:change={handleChange}
-                    />
-                    <label for="floatingInput">Text9</label>
-                </div>
+                
                 
             </TabPanel>
         
@@ -182,7 +187,7 @@
         </div>
     </div>
     <div class="body2">
-        <h1>lønarseðil PDF</h1>
+        <h1>Lønarseðil PDF</h1>
         <div class="preview">
             <div id="invoice" class="a4-paper">
               <PdfHeader />
@@ -235,8 +240,10 @@
         align-items: center;
     }
     .a4-paper {
-        max-width: 655px;
-        height: 902px;
+        width: 655px;
+        /* height: 902px; */
+        height: 882px;
+        float: right;
         overflow: hidden;
         background: white;
         padding: 30px;
