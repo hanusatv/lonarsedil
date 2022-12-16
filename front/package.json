@@ -19,8 +19,11 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "bootstrap-datepicker": "^1.9.0",
+    "date-fns": "^2.29.3",
     "date-picker-svelte": "^2.2.5",
+    "pdfmake": "^0.2.6",
     "svelte-spa-router": "^3.3.0",
+    "svelte-tabs": "^1.1.0",
     "svelty-picker": "^3.2.3"
   }
 }
