@@ -1,21 +1,12 @@
 <script>
     import { selectedRoute } from "../stores/store.js";
-    selectedRoute.set("lontakarar");
+    import { Lonarfolk } from "../classes/classes.js";
     import SveltyPicker from "svelty-picker";
     export let params;
 
-    async function heintaLonarfolk() {
-        const res = await fetch(`http://127.0.0.1:8000/lontakari/` + params.id);
-        const text = await res.json();
-        console.log(text);
-        if (res.ok) {
-            return text;
-        } else {
-            throw new Error(text);
-        }
-    }
+    selectedRoute.set("lontakarar");
 
-    let promise = heintaLonarfolk();
+    let promise = Lonarfolk.heintaEin(params.id);
 
     // Delete button start
     document.querySelectorAll(".button").forEach((button) =>

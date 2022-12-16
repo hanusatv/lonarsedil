@@ -1,13 +1,11 @@
 <script>
-    import "animate.css";
     import LontakariListBox from "../elements/LontakariListBox.svelte";
     import { selectedRoute } from "../stores/store.js";
+    import { Lonarfolk } from "../classes/classes";
+
     selectedRoute.set("lontakarar");
 
-    const fetchLonarfolk = (async () => {
-        const response = await fetch("http://localhost:8000/lontakari/");
-        return await response.json();
-    })();
+    const fetchLonarfolk = Lonarfolk.heintaOll();
 </script>
 
 <button class="new">
