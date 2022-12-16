@@ -27,6 +27,18 @@
         <p>Bíða...</p>
     {:then lonarfolk}
         <h1>{lonarfolk.Navn}</h1>
+        <div class="buttom-buttons-row1">
+            <button class="button1">
+                <a href="http://localhost:5173/#/GerPDF/">
+                    <img
+                        class="svg-icon svg-color"
+                        src="/src/assets/icons/pdf.png"
+                        alt="edit"
+                    />
+                    <span>Ger lønarseðil</span>
+                </a></button
+            >
+        </div>
         <!-- Body1 -->
         <h2 class="input-group-heading">Adressa</h2>
         <hr />
@@ -258,6 +270,27 @@
     }
     /* Button Lonar tittleiki end */
     /* Button sletta lønartakara Start */
+    .button1 {
+        --background: #2b3044;
+        --background-hover: #1e2235;
+        position: relative;
+        border: none;
+        outline: none;
+        background: none;
+        padding: 5px 24px;
+        border-radius: 7px;
+        min-width: 142px;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+        display: flex;
+        color: var(--text);
+        background: var(--btn, var(--background));
+        box-shadow: 0 var(--shadow-y, 4px) var(--shadow-blur, 8px) var(--shadow);
+        transform: scale(var(--scale, 1));
+        transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        float: right;
+    }
     .button {
         --background: #2b3044;
         --background-hover: #1e2235;
