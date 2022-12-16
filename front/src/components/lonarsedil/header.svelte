@@ -33,5 +33,6 @@
     {lonarfolk.Telefon}<br />
     {lonarfolk.Ptal}<br />
     {lonarfolk.Starvsheiti}<br />
+    {lonarfolk.Fødingardagur}<br />
 
 </address>

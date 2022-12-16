@@ -125,7 +125,7 @@
                     />
                     <label for="floatingInput">Text8</label>
                 </div>
-                <!-- <div class="form-floating">
+                <div class="form-floating">
                     <SveltyPicker
                         inputClasses="form-control"
                         inputId="floatingInput"
@@ -138,7 +138,7 @@
                         on:change={handleChange}
                     />
                     <label for="floatingInput">Text9</label>
-                </div> -->
+                </div>
                 
             </TabPanel>
         
@@ -176,6 +176,10 @@
                 </div>
             </TabPanel>
         </Tabs>
+        <div>
+            <button class="button1">Send PDF Mail</button>
+            <button class="button2">Goym PDF</button>
+        </div>
     </div>
     <div class="body2">
         <h1>lønarseðil PDF</h1>
@@ -191,6 +195,26 @@
 
 
 <style>
+    .button1 {
+        float: left;
+        cursor: pointer;
+        border-radius: 7px;
+        padding: 5px 24px;
+        border: none;
+        outline: none;
+        background: #2b3044;
+        color: #a5aaff;
+    }
+    .button2 {
+        float: right;
+        cursor: pointer;
+        border-radius: 7px;
+        padding: 5px 24px;
+        border: none;
+        outline: none;
+        background: #2b3044;
+        color: #a5aaff;
+    }
     .form-floating {
         padding: 4px 0px;
     }
