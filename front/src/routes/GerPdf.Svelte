@@ -15,6 +15,7 @@
     lonarfolk.FyritokaTelefon = "Tlf. 316767";
     lonarfolk.FyritokaEmail = "Lønarseðil@Lønarseðil.fo";
 
+
     user.set(lonarfolk);
     
 
@@ -29,8 +30,9 @@
     <div class="body1">
         <Tabs>
             <TabList>
-                <Tab>Persónsupplýsingar</Tab>
-                <Tab>Løn</Tab>
+                <Tab>Persón upplýsingar</Tab>
+                <Tab>Fyritøku upplýsingar</Tab>
+                <Tab>Linjur</Tab>
             </TabList>
         
             <TabPanel>
@@ -148,7 +150,59 @@
             </TabPanel>
         
             <TabPanel>
-                <h2>Løn</h2>
+                <h2>Fyritøku upplýsingar</h2>
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="311234"
+                        bind:value={lonarfolk.FyritokaAdressa}
+                        on:keyup={handleChange}
+                        on:change={handleChange}
+                    />
+                    <label for="floatingInput">Adressa</label>
+                </div>
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="311234"
+                        bind:value={lonarfolk.FyritokaPostBydur}
+                        on:keyup={handleChange}
+                        on:change={handleChange}
+                    />
+                    <label for="floatingInput">Post Býður</label>
+                </div>
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="311234"
+                        bind:value={lonarfolk.FyritokaTelefon}
+                        on:keyup={handleChange}
+                        on:change={handleChange}
+                    />
+                    <label for="floatingInput">Telefon</label>
+                </div>
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="311234"
+                        bind:value={lonarfolk.FyritokaEmail}
+                        on:keyup={handleChange}
+                        on:change={handleChange}
+                    />
+                    <label for="floatingInput">Email</label>
+                </div>
+            </TabPanel>
+
+            <TabPanel>
+                <h2>Linjur</h2>
                 <div class="form-floating">
                     <input
                         type="text"
@@ -157,7 +211,7 @@
                         placeholder="20.000"
                         value={lonarfolk.lon}
                     />
-                    <label for="floatingInput">Løn</label>
+                    <label for="floatingInput">Fráfreiðing</label>
                 </div>
                 <div class="form-floating">
                     <input
