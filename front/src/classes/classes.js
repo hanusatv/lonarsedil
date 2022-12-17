@@ -1,12 +1,19 @@
+const baseUrl = "BASE_URL_BACK"
+
 export class Lonarfolk {
+    constructor() {
+        // const yamlData = yaml.load(fs.readFileSync("../../../.env.yaml", 'utf8'));
+        // console.log(yamlData)
+    }
+
 
     static async heintaOll() {
-        const response = await fetch("http://localhost:8000/lontakari/");
+        const response = await fetch(baseUrl + "/lontakari");
         return await response.json();
     }
 
     static async heintaEin(id) {
-        const response = await fetch("http://127.0.0.1:8000/lontakari/" + id);
+        const response = await fetch(baseUrl + "/lontakari/" + id);
         return await response.json();
     }
 }
