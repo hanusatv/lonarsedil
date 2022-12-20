@@ -9,6 +9,7 @@ export class Lonarfolk {
 
     static async heintaOll() {
         const response = await fetch(baseUrl + "/lontakari");
+        console.log(baseUrl)
         return await response.json();
     }
 
