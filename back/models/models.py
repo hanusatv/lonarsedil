@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class Lontakari(BaseModel):
     Fyritoka: str
     Navn: str
@@ -10,6 +11,7 @@ class Lontakari(BaseModel):
     Land: str
     KontoNummar: str
     Løn: int
+
 
 class Fyritoka(BaseModel):
     Navn: str

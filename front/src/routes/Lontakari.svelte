@@ -6,7 +6,13 @@
 
     selectedRoute.set("lontakarar");
 
-    let promise = Lonarfolk.heintaEin(params.id);
+    const promise = Lonarfolk.heintaEin(params.id);
+
+    function handleChange(e) {
+        let key = e.target.getAttribute("data-key");
+        let value = e.target.value;
+        Lonarfolk.dagfor(params.id, { [key]: value });
+    }
 
     // Delete button start
     document.querySelectorAll(".button").forEach((button) =>
@@ -46,22 +52,26 @@
             <!-- Gøta -->
             <div class="form-floating">
                 <input
+                    on:change={handleChange}
                     type="text"
                     class="form-control"
                     id="floatingInput"
                     placeholder="Tinghúsvegur 1"
                     value={lonarfolk.Bustadur}
+                    data-key="Bustadur"
                 />
                 <label for="floatingInput">Gøtunavn</label>
             </div>
             <!-- Býur -->
             <div class="form-floating">
                 <input
+                    on:change={handleChange}
                     type="text"
                     class="form-control"
                     id="floatingInput"
                     placeholder="Tórshavn"
                     value={lonarfolk.Bydur}
+                    data-key="Bydur"
                 />
                 <label for="floatingInput">Býur</label>
             </div>

@@ -49,7 +49,7 @@
                 </div>
             {/each}
         {:catch error}
-            <p>An error occurred!</p>
+            <p>{error.message}</p>
         {/await}
     </ul>
 </div>
