@@ -82,7 +82,7 @@
                     class="form-control"
                     id="floatingInput"
                     placeholder="100"
-                    value="Post koda"
+                    value={lonarfolk.Mail}
                 />
                 <label for="floatingInput">Postnummar</label>
             </div>
@@ -105,22 +105,26 @@
             <!-- Teldupostur -->
             <div class="form-floating">
                 <input
+                    on:change={handleChange}
                     type="email"
                     class="form-control"
                     id="floatingInput"
                     placeholder="navn@dømi.fo"
                     value={lonarfolk.Mail}
+                    data-key="Mail"
                 />
                 <label for="floatingInput">Teldupostur</label>
             </div>
             <!-- Telefon nummar -->
             <div class="form-floating">
                 <input
+                    on:change={handleChange}
                     type="text"
                     class="form-control"
                     id="floatingInput"
                     placeholder="311234"
                     value={lonarfolk.Telefon}
+                    data-key="Telefon"
                 />
                 <label for="floatingInput">Telefon nummar</label>
             </div>
@@ -131,11 +135,13 @@
             <!-- Navn -->
             <div class="form-floating">
                 <input
+                    on:change={handleChange}
                     type="text"
                     class="form-control"
                     id="floatingInput"
                     placeholder="311234"
                     value={lonarfolk.Navn}
+                    data-key="Navn"
                 />
                 <label for="floatingInput">Navn</label>
             </div>
