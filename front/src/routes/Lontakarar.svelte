@@ -6,9 +6,20 @@
     selectedRoute.set("lontakarar");
 
     const fetchLonarfolk = Lonarfolk.heintaOll();
+
+    //Write a function that calls Lonarfole.upaetta() and the redirect to the new employee page (lontakari.svelte) with the ID returned from the function
+    function upraetta() {
+        Lonarfolk.upraetta()
+            .then((id) => {
+                window.location.href = `http://localhost:5173/#/lontakari/${id}`;
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    }
 </script>
 
-<button class="new" on:click={() => Lonarfolk.upraetta()}>
+<button class="new" on:click={upraetta}>
     <img
         class="svg-icon svg-color"
         src="/src/assets/icons/person-add.svg"
