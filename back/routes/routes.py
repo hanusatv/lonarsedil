@@ -22,8 +22,7 @@ async def heinta_ein_lontakara(id):
 async def skapa_lontakara():
     record = {}
     result = collection.insert_one(record) 
-    inserted_record = collection.find_one({"_id": result.inserted_id})
-    return serializeList([inserted_record]) 
+    return serializeDict(collection.find_one({"_id": result.inserted_id}))
 
 # Broyt ein løntakara
 @lontakari.put('/lontakari/{id}')
