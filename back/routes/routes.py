@@ -27,9 +27,9 @@ async def heinta_ein_lontakara(id):
 @lontakari.post('/lontakari/')
 async def skapa_lontakara():
     record = {}
-    collection.insert_one(
-        record,  bypass_document_validation=False, session=None, comment=None)
-    return collection.find()
+    result = collection.insert_one(record)
+    inserted_record = collection.find_one({"_id": result.inserted_id})
+    return serializeList([inserted_record])
 
 # Broyt ein løntakara
 
