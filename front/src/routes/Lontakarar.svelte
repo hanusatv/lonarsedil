@@ -8,7 +8,7 @@
     const fetchLonarfolk = Lonarfolk.heintaOll();
 </script>
 
-<button class="new">
+<button class="new" on:click={() => Lonarfolk.upraetta()}>
     <img
         class="svg-icon svg-color"
         src="/src/assets/icons/person-add.svg"
