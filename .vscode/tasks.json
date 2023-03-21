@@ -18,7 +18,7 @@
         {
             "label": "backend",
             "type": "shell",
-            "command": "uvicorn main:app --reload",
+            "command": "python3 -m uvicorn main:app --reload",
             "options": {
                 "cwd": "${workspaceFolder}/back"
             },
