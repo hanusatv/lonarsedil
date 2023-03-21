@@ -78,22 +78,26 @@
             <!-- Postnummar -->
             <div class="form-floating">
                 <input
+                    on:change={handleChange}
                     type="text"
                     class="form-control"
                     id="floatingInput"
                     placeholder="100"
                     value={lonarfolk.Mail}
+                    data-key="PostNummar"
                 />
                 <label for="floatingInput">Postnummar</label>
             </div>
             <!-- Land -->
             <div class="form-floating">
                 <input
+                    on:change={handleChange}
                     type="text"
                     class="form-control"
                     id="floatingInput"
                     placeholder="Føroyar"
                     value="Frøbjar"
+                    data-key="Land"
                 />
                 <label for="floatingInput">Land</label>
             </div>
@@ -158,11 +162,13 @@
             </div>
             <div class="form-floating">
                 <input
+                    on:change={handleChange}
                     type="text"
                     class="form-control"
                     id="floatingInput"
                     placeholder="311234"
                     value={lonarfolk.Ptal}
+                    data-key="Ptal"
                 />
                 <label for="floatingInput">P-tal</label>
             </div>
