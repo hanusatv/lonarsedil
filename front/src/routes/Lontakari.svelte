@@ -32,7 +32,7 @@
     {#await promise}
         <p>Bíða...</p>
     {:then lonarfolk}
-        <h1>{lonarfolk.Navn}</h1>
+        <h1>{lonarfolk.data.Navn}</h1>
         <div class="buttom-buttons-row1">
             <button class="button1">
                 <a href="http://localhost:5173/#/GerPDF/">
@@ -57,7 +57,7 @@
                     class="form-control"
                     id="floatingInput"
                     placeholder="Tinghúsvegur 1"
-                    value={lonarfolk.Bustadur}
+                    value={lonarfolk.data.Bustadur}
                     data-key="Bustadur"
                 />
                 <label for="floatingInput">Gøtunavn</label>
@@ -70,7 +70,7 @@
                     class="form-control"
                     id="floatingInput"
                     placeholder="Tórshavn"
-                    value={lonarfolk.Bydur}
+                    value={lonarfolk.data.Bydur}
                     data-key="Bydur"
                 />
                 <label for="floatingInput">Býur</label>
@@ -83,7 +83,7 @@
                     class="form-control"
                     id="floatingInput"
                     placeholder="100"
-                    value={lonarfolk.Mail}
+                    value={lonarfolk.data.Mail}
                     data-key="PostNummar"
                 />
                 <label for="floatingInput">Postnummar</label>
@@ -114,7 +114,7 @@
                     class="form-control"
                     id="floatingInput"
                     placeholder="navn@dømi.fo"
-                    value={lonarfolk.Mail}
+                    value={lonarfolk.data.Mail}
                     data-key="Mail"
                 />
                 <label for="floatingInput">Teldupostur</label>
@@ -127,7 +127,7 @@
                     class="form-control"
                     id="floatingInput"
                     placeholder="311234"
-                    value={lonarfolk.Telefon}
+                    value={lonarfolk.data.Telefon}
                     data-key="Telefon"
                 />
                 <label for="floatingInput">Telefon nummar</label>
@@ -144,7 +144,7 @@
                     class="form-control"
                     id="floatingInput"
                     placeholder="311234"
-                    value={lonarfolk.Navn}
+                    value={lonarfolk.data.Navn}
                     data-key="Navn"
                 />
                 <label for="floatingInput">Navn</label>
@@ -167,7 +167,7 @@
                     class="form-control"
                     id="floatingInput"
                     placeholder="311234"
-                    value={lonarfolk.Ptal}
+                    value={lonarfolk.data.Ptal}
                     data-key="Ptal"
                 />
                 <label for="floatingInput">P-tal</label>
@@ -186,15 +186,15 @@
         </div>
         <div class="lontakari-info">
             Slag av inntøku:<br />
-            <strong>{lonarfolk.Slagavinntøku}</strong>
+            <strong>{lonarfolk.data.Slagavinntøku}</strong>
         </div>
         <div class="lontakari-info">
             Løn brutto:<br />
-            <strong>{lonarfolk.Løn}</strong>
+            <strong>{lonarfolk.data.Løn}</strong>
         </div>
         <div class="lontakari-info">
             Rest feria:<br />
-            <strong>{lonarfolk.Restferia} dagar</strong>
+            <strong>{lonarfolk.data.Restferia} dagar</strong>
         </div>
         <label class="lontakari-info" for="lonar-tittleiki-dropdown"
             >Lønar títtleiki:</label

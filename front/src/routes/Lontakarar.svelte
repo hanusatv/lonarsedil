@@ -10,8 +10,8 @@
     //Write a function that calls Lonarfole.upaetta() and the redirect to the new employee page (lontakari.svelte) with the ID returned from the function
     function upraetta() {
         Lonarfolk.upraetta()
-            .then((id) => {
-                window.location.href = `http://localhost:5173/#/lontakari/${id}`;
+            .then((res) => {
+                window.location.href = `http://localhost:5173/#/lontakari/${res._id}`;
             })
             .catch((err) => {
                 alert(err);
