@@ -143,7 +143,7 @@
                     type="text"
                     class="form-control"
                     id="floatingInput"
-                    placeholder="311234"
+                    placeholder="Petur Petersen"
                     value={lonarfolk.data.Navn}
                     data-key="Navn"
                 />

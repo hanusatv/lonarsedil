@@ -1,6 +1,6 @@
 <script>
   import Router from "svelte-spa-router";
-  import Navigationbar from "./elements/Navigationbar.svelte"; 
+  import Navigationbar from "./elements/Navigationbar.svelte";
   import Fyritoka from "./routes/Fyritoka.svelte";
   import Home from "./routes/Home.svelte";
   import Lontakarar from "./routes/Lontakarar.svelte";
@@ -52,5 +52,6 @@
     flex-grow: 1;
     padding: 2em 5em;
     overflow: auto;
+    height: calc(100% - 4em);
   }
 </style>
