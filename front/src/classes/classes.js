@@ -31,6 +31,26 @@ class LonarfolkData {
     }
 }
 
+class FyritokaData {
+    constructor(data) {
+        this.data = {
+            _id: "",
+            Navn: "",
+            Gøta: "",
+            Bydur: "",
+            PostNummar: "",
+            Land: "",
+            KontoNummar: "",
+            Telefon: "",
+            V_Tal: ""
+        };
+        //Iterate over the data, which is an JSON object, and replace the values in the data object with the values from the JSON object
+        for (const [key, value] of Object.entries(data)) {
+            this.data[key] = value;
+        }
+    }
+}
+
 
 export class Lonarfolk {
 
@@ -101,25 +121,7 @@ export class Lonarfolk {
     }
 }
 
-class FyritokaData {
-    constructor(data) {
-        this.data = {
-            _id: "",
-            Navn: "",
-            Gøta: "",
-            Bydur: "",
-            PostNummar: "",
-            Land: "",
-            KontoNummar: "",
-            Telefon: "",
-            V_Tal: ""
-        };
-        //Iterate over the data, which is an JSON object, and replace the values in the data object with the values from the JSON object
-        for (const [key, value] of Object.entries(data)) {
-            this.data[key] = value;
-        }
-    }
-}
+
 
 export class Fyritoka {
 

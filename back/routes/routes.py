@@ -27,7 +27,7 @@ async def heinta_ein_lontakara(id):
 @lontakari.post('/lontakari/')
 async def skapa_lontakara():
     record = {}
-    result = collection.insert_one(record) 
+    result = collection.insert_one(record)
     return serializeDict(collection.find_one({"_id": result.inserted_id}))
 
 # Broyt ein løntakara
@@ -44,7 +44,7 @@ async def dagfør_lontakara(id, felt: dict):
 
 
 @lontakari.delete('/lontakari/{id}')
-async def strika_lontakara(id, lontakari: Lontakari):
+async def strika_lontakara(id):
     return serializeDict(collection.find_one_and_delete({"_id": ObjectId(id)}))
 
 # heilta allar fyritøkur

@@ -26,180 +26,179 @@
     let generatedPdfUrl = null;
 
     async function generatePDF(lonarfolk) {
-  const pdfDoc = await PDFDocument.create();
-  const page = pdfDoc.addPage();
-  const { width, height } = page.getSize();
+        const pdfDoc = await PDFDocument.create();
+        const page = pdfDoc.addPage();
+        const { width, height } = page.getSize();
 
-  var currentDate = new Date();
-  var year = currentDate.getFullYear();
+        var currentDate = new Date();
+        var year = currentDate.getFullYear();
 
-  // Set font styles
-  const titleFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+        // Set font styles
+        const titleFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+        const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-  // Title
-  page.drawText('Lønarseðil ' + year, {
-    x: 200,
-    y: height - 50,
-    size: 24,
-    font: titleFont,
-    color: rgb(0, 0.53, 0.71),
-  });
+        // Title
+        page.drawText("Lønarseðil " + year, {
+            x: 200,
+            y: height - 50,
+            size: 24,
+            font: titleFont,
+            color: rgb(0, 0.53, 0.71),
+        });
 
-  // Company Information
-  const CompinfoX = 400;
-  const CompinfoYStart = height - 100;
-  const CompinfoLineHeight = 20;
+        // Company Information
+        const CompinfoX = 400;
+        const CompinfoYStart = height - 100;
+        const CompinfoLineHeight = 20;
 
-  const CompInfo = [
-    { label: '', value: 'C3IT' },
-    { label: '', value: 'Adressa' },
-    { label: '', value: '2300 København S' },
-    { label: '', value: 'C3@IT.DK' },
-    { label: '', value: '31676767' },
-    { label: '', value: '123456-123' },
-  ];
+        const CompInfo = [
+            { label: "", value: "C3IT" },
+            { label: "", value: "Adressa" },
+            { label: "", value: "2300 København S" },
+            { label: "", value: "C3@IT.DK" },
+            { label: "", value: "31676767" },
+            { label: "", value: "123456-123" },
+        ];
 
-  CompInfo.forEach((info, index) => {
-    const yPos = CompinfoYStart - index * CompinfoLineHeight;
-    page.drawText(`${info.label} ${info.value}`, {
-      x: CompinfoX,
-      y: yPos,
-      size: 14,
-      font: regularFont,
-    });
-  });
+        CompInfo.forEach((info, index) => {
+            const yPos = CompinfoYStart - index * CompinfoLineHeight;
+            page.drawText(`${info.label} ${info.value}`, {
+                x: CompinfoX,
+                y: yPos,
+                size: 14,
+                font: regularFont,
+            });
+        });
 
-  // Employee Information
-  const infoX = 30;
-  const infoYStart = height - 100;
-  const infoLineHeight = 20;
+        // Employee Information
+        const infoX = 30;
+        const infoYStart = height - 100;
+        const infoLineHeight = 20;
 
-  const employeeInfo = [
-    { label: '', value: lonarfolk.data.Navn },
-    { label: '', value: lonarfolk.data.Bydur },
-    { label: '', value: lonarfolk.data.Bustadur },
-    { label: '', value: lonarfolk.data.Mail },
-    { label: '', value: lonarfolk.data.Fødingardagur },
-    { label: '', value: lonarfolk.data.Telefon },
-  ];
+        const employeeInfo = [
+            { label: "", value: lonarfolk.data.Navn },
+            { label: "", value: lonarfolk.data.Bydur },
+            { label: "", value: lonarfolk.data.Bustadur },
+            { label: "", value: lonarfolk.data.Mail },
+            { label: "", value: lonarfolk.data.Fødingardagur },
+            { label: "", value: lonarfolk.data.Telefon },
+        ];
 
-  employeeInfo.forEach((info, index) => {
-    const yPos = infoYStart - index * infoLineHeight;
-    page.drawText(`${info.label} ${info.value}`, {
-      x: infoX,
-      y: yPos,
-      size: 14,
-      font: regularFont,
-    });
-  });
+        employeeInfo.forEach((info, index) => {
+            const yPos = infoYStart - index * infoLineHeight;
+            page.drawText(`${info.label} ${info.value}`, {
+                x: infoX,
+                y: yPos,
+                size: 14,
+                font: regularFont,
+            });
+        });
 
-  page.drawText('Frágreiðing', {
-    x: 30,
-    y: height - 400,
-    size: 14,
-    font: titleFont,
-  });
+        page.drawText("Frágreiðing", {
+            x: 30,
+            y: height - 400,
+            size: 14,
+            font: titleFont,
+        });
 
-    page.drawText('Tímar', {
-    x: 330,
-    y: height - 400,
-    size: 14,
-    font: titleFont,
-  });
+        page.drawText("Tímar", {
+            x: 330,
+            y: height - 400,
+            size: 14,
+            font: titleFont,
+        });
 
-    page.drawText('Løn', {
-    x: 500,
-    y: height - 400,
-    size: 14,
-    font: titleFont,
-  });
+        page.drawText("Løn", {
+            x: 500,
+            y: height - 400,
+            size: 14,
+            font: titleFont,
+        });
 
-  // Draw additional lines
-  const lineYStart = height - 220;
-  const lineYEnd = height - 600;
-  const lineXStart = 30;
-  const lineXEnd = width - 30;
+        // Draw additional lines
+        const lineYStart = height - 220;
+        const lineYEnd = height - 600;
+        const lineXStart = 30;
+        const lineXEnd = width - 30;
 
-  page.drawLine({
-    start: { x: lineXStart, y: lineYStart },
-    end: { x: lineXEnd, y: lineYStart },
-    thickness: 2,
-    color: rgb(0.5, 0.5, 0.5),
-  });
+        page.drawLine({
+            start: { x: lineXStart, y: lineYStart },
+            end: { x: lineXEnd, y: lineYStart },
+            thickness: 2,
+            color: rgb(0.5, 0.5, 0.5),
+        });
 
-  page.drawLine({
-    start: { x: lineXStart, y: 440 },
-    end: { x: lineXEnd, y: 440 },
-    thickness: 2,
-    color: rgb(0.5, 0.5, 0.5),
-  });
+        page.drawLine({
+            start: { x: lineXStart, y: 440 },
+            end: { x: lineXEnd, y: 440 },
+            thickness: 2,
+            color: rgb(0.5, 0.5, 0.5),
+        });
 
-  // Draw additional lines with description, quantity, and salary
-  const lineInfoX = 30;
-  const lineInfoYStart = height - 420;
-  const lineInfoLineHeight = 20;
+        // Draw additional lines with description, quantity, and salary
+        const lineInfoX = 30;
+        const lineInfoYStart = height - 420;
+        const lineInfoLineHeight = 20;
 
-  const lineDetails = [
-    { description: lonarfolk.data.Desc, quantity: lonarfolk.data.Tímar, salary: lonarfolk.data.Løn },
-    // Add more line details as needed
-  ];
+        const lineDetails = [
+            {
+                description: lonarfolk.data.Desc,
+                quantity: lonarfolk.data.Tímar,
+                salary: lonarfolk.data.Løn,
+            },
+            // Add more line details as needed
+        ];
 
-  lineDetails.forEach((line, index) => {
-    const yPos = lineInfoYStart - index * lineInfoLineHeight;
-    page.drawText(`${line.description}`, {
-      x: lineInfoX,
-      y: yPos,
-      size: 14,
-      font: regularFont,
-    });
-    page.drawText(`${line.quantity}`, {
-      x: lineInfoX + 300,
-      y: yPos,
-      size: 14,
-      font: regularFont,
-    });
-    page.drawText(`${line.salary}`, {
-      x: lineInfoX + 450,
-      y: yPos,
-      size: 14,
-      font: regularFont,
-    });
-  });
+        lineDetails.forEach((line, index) => {
+            const yPos = lineInfoYStart - index * lineInfoLineHeight;
+            page.drawText(`${line.description}`, {
+                x: lineInfoX,
+                y: yPos,
+                size: 14,
+                font: regularFont,
+            });
+            page.drawText(`${line.quantity}`, {
+                x: lineInfoX + 300,
+                y: yPos,
+                size: 14,
+                font: regularFont,
+            });
+            page.drawText(`${line.salary}`, {
+                x: lineInfoX + 450,
+                y: yPos,
+                size: 14,
+                font: regularFont,
+            });
+        });
 
+        // Feria
+        page.drawText("Rest Feria", {
+            x: 30,
+            y: 150,
+            size: 14,
+            font: titleFont,
+        });
+        page.drawLine({
+            start: { x: lineXStart, y: 140 },
+            end: { x: lineXEnd, y: 140 },
+            thickness: 2,
+            color: rgb(0.5, 0.5, 0.5),
+        });
 
+        page.drawText(lonarfolk.data.Restferia + " dagar", {
+            x: 30,
+            y: 120,
+            size: 14,
+            font: regularFont,
+        });
 
-  // Feria
-  page.drawText('Rest Feria', {
-    x: 30,
-    y: 150,
-    size: 14,
-    font: titleFont,
-  });
-  page.drawLine({
-    start: { x: lineXStart, y: 140 },
-    end: { x: lineXEnd, y: 140 },
-    thickness: 2,
-    color: rgb(0.5, 0.5, 0.5),
-  });
-
-  page.drawText(lonarfolk.data.Restferia + ' dagar', {
-    x: 30,
-    y: 120,
-    size: 14,
-    font: regularFont,
-  });
-
-
-
-
-  // Save and display the PDF
-  const pdfBytes = await pdfDoc.save();
-  const pdfUrl = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
-  generatedPdfUrl = pdfUrl;
-}
-
-
+        // Save and display the PDF
+        const pdfBytes = await pdfDoc.save();
+        const pdfUrl = URL.createObjectURL(
+            new Blob([pdfBytes], { type: "application/pdf" })
+        );
+        generatedPdfUrl = pdfUrl;
+    }
 
     onMount(() => {
         return () => {
@@ -248,51 +247,6 @@
                         />
                         <label for="floatingInput">Býur</label>
                     </div>
-<<<<<<< HEAD
-                    <!-- Postnummar -->
-                    <div class="form-floating">
-                        <input
-                            on:change={handleChange}
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="100"
-                            value={lonarfolk.data.Mail}
-                            data-key="PostNummar"
-                        />
-                        <label for="floatingInput">Postnummar</label>
-                    </div>
-                    <!-- Land -->
-                    <div class="form-floating">
-                        <input
-                            on:change={handleChange}
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Føroyar"
-                            value="Frøbjar"
-                            data-key="Land"
-                        />
-                        <label for="floatingInput">Land</label>
-                    </div>
-                </form>
-                <!-- Body 2 -->
-                <h2 class="input-group-heading">Kontakt</h2>
-                <hr />
-                <div class="sub-group">
-                    <!-- Teldupostur -->
-                    <div class="form-floating">
-                        <input
-                            on:change={handleChange}
-                            type="email"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="navn@dømi.fo"
-                            value={lonarfolk.data.Mail}
-                            data-key="Mail"
-                        />
-                        <label for="floatingInput">Teldupostur</label>
-=======
                     <h2 class="input-group-heading">Lønupplýsningar</h2>
                     <hr />
                     <div class="sub-group">
@@ -348,7 +302,6 @@
                             />
                             <label for="floatingInput">Rest feria</label>
                         </div>
->>>>>>> c68b5de7c5ecf43374617ba33d785592b0de3b46
                     </div>
                     <!-- Telefon nummar -->
                     <div class="form-floating">
@@ -363,104 +316,104 @@
                         />
                         <label for="floatingInput">Telefon nummar</label>
                     </div>
+                </form>
+            </div>
+            <h2 class="input-group-heading">Persónsupplýsingar</h2>
+            <hr />
+            <div class="sub-group">
+                <!-- Navn -->
+                <div class="form-floating">
+                    <input
+                        on:change={handleChange}
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="Petur Petersen"
+                        value={lonarfolk.data.Navn}
+                        data-key="Navn"
+                    />
+                    <label for="floatingInput">Navn</label>
                 </div>
-                <h2 class="input-group-heading">Persónsupplýsingar</h2>
-                <hr />
-                <div class="sub-group">
-                    <!-- Navn -->
-                    <div class="form-floating">
-                        <input
-                            on:change={handleChange}
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Petur Petersen"
-                            value={lonarfolk.data.Navn}
-                            data-key="Navn"
-                        />
-                        <label for="floatingInput">Navn</label>
-                    </div>
-                    <div class="form-floating">
-                        <SveltyPicker
-                            inputClasses="form-control"
-                            inputId="floatingInput"
-                            format="dd-mm-yyyy"
-                            placeholder=" "
-                            todayBtn={false}
-                            clearBtn={false}
-                        />
-                        <label for="floatingInput">Føðingardagur</label>
-                    </div>
-                    <div class="form-floating">
-                        <input
-                            on:change={handleChange}
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="311234"
-                            value={lonarfolk.data.Ptal}
-                            data-key="Ptal"
-                        />
-                        <label for="floatingInput">P-tal</label>
-                    </div>
-                    <div class="form-floating">
-                        <SveltyPicker
-                            inputClasses="form-control"
-                            inputId="floatingInput"
-                            format="dd-mm-yyyy"
-                            placeholder=" "
-                            todayBtn={false}
-                            clearBtn={false}
-                        />
-                        <label for="floatingInput">Setanardagur</label>
-                    </div>
+                <div class="form-floating">
+                    <SveltyPicker
+                        inputClasses="form-control"
+                        inputId="floatingInput"
+                        format="dd-mm-yyyy"
+                        placeholder=" "
+                        todayBtn={false}
+                        clearBtn={false}
+                    />
+                    <label for="floatingInput">Føðingardagur</label>
                 </div>
-                <div class="lontakari-info">
-                    Slag av inntøku:<br />
-                    <strong>{lonarfolk.data.Slagavinntøku}</strong>
+                <div class="form-floating">
+                    <input
+                        on:change={handleChange}
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="311234"
+                        value={lonarfolk.data.Ptal}
+                        data-key="Ptal"
+                    />
+                    <label for="floatingInput">P-tal</label>
                 </div>
-                <div class="lontakari-info">
-                    Løn brutto:<br />
-                    <strong>{lonarfolk.data.Løn}</strong>
+                <div class="form-floating">
+                    <SveltyPicker
+                        inputClasses="form-control"
+                        inputId="floatingInput"
+                        format="dd-mm-yyyy"
+                        placeholder=" "
+                        todayBtn={false}
+                        clearBtn={false}
+                    />
+                    <label for="floatingInput">Setanardagur</label>
                 </div>
-                <div class="lontakari-info">
-                    Rest feria:<br />
-                    <strong>{lonarfolk.data.Restferia} dagar</strong>
-                </div>
-                <label class="lontakari-info" for="lonar-tittleiki-dropdown"
-                    >Lønar títtleiki:</label
-                >
-                <div class="lonar-tittleiki-dropdown">
-                    <select>
-                        <option value="Option 1">Hvønn mánað</option>
-                        <option value="Option 2">Aðra hvørja viku</option>
-                        <option value="Option 3">Hvørja viku</option>
-                    </select>
-                </div>
-                <!-- Footer -->
-                <div class="buttom-buttons-row">
-                    <button on:click={lonarfolkDelete} class="button">
-                        <div class="trash">
-                            <div class="top">
-                                <div class="paper" />
-                            </div>
-                            <div class="box" />
-                            <div class="check">
-                                <svg viewBox="0 0 8 6">
-                                    <polyline points="1 3.4 2.71428571 5 7 1" />
-                                </svg>
-                            </div>
+            </div>
+            <div class="lontakari-info">
+                Slag av inntøku:<br />
+                <strong>{lonarfolk.data.Slagavinntøku}</strong>
+            </div>
+            <div class="lontakari-info">
+                Løn brutto:<br />
+                <strong>{lonarfolk.data.Løn}</strong>
+            </div>
+            <div class="lontakari-info">
+                Rest feria:<br />
+                <strong>{lonarfolk.data.Restferia} dagar</strong>
+            </div>
+            <label class="lontakari-info" for="lonar-tittleiki-dropdown"
+                >Lønar títtleiki:</label
+            >
+            <div class="lonar-tittleiki-dropdown">
+                <select>
+                    <option value="Option 1">Hvønn mánað</option>
+                    <option value="Option 2">Aðra hvørja viku</option>
+                    <option value="Option 3">Hvørja viku</option>
+                </select>
+            </div>
+            <!-- Footer -->
+            <div class="buttom-buttons-row">
+                <button on:click={lonarfolkDelete} class="button">
+                    <div class="trash">
+                        <div class="top">
+                            <div class="paper" />
                         </div>
-                        <span>Strika løntakara</span>
-                    </button>
-                    <div class="button">
-                        <button
-                            on:click={generatePDF(lonarfolk)}
-                            class="generate-pdf-button"
-                        >
-                            <span>Ger PDF</span>
-                        </button>
+                        <div class="box" />
+                        <div class="check">
+                            <svg viewBox="0 0 8 6">
+                                <polyline points="1 3.4 2.71428571 5 7 1" />
+                            </svg>
+                        </div>
                     </div>
+                    <span>Strika løntakara</span>
+                </button>
+                <div class="button">
+                    <button
+                        on:click={generatePDF(lonarfolk)}
+                        class="generate-pdf-button"
+                    >
+                        <span>Ger PDF</span>
+                    </button>
                 </div>
             </div>
             <div class="right-side">
