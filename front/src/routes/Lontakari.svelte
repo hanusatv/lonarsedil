@@ -26,156 +26,180 @@
     let generatedPdfUrl = null;
 
     async function generatePDF(lonarfolk) {
-        const pdfDoc = await PDFDocument.create();
-        const page = pdfDoc.addPage();
-        const { width, height } = page.getSize();
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage();
+  const { width, height } = page.getSize();
 
-        var currentDate = new Date();
-        var year = currentDate.getFullYear();
+  var currentDate = new Date();
+  var year = currentDate.getFullYear();
 
-        // Set font styles
-        const titleFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-        const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  // Set font styles
+  const titleFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-        // Draw title
-        page.drawText("Lønarseðil " + year, {
-            x: 30,
-            y: height - 50,
-            size: 24,
-            font: titleFont,
-            color: rgb(0, 0.53, 0.71),
-        });
+  // Title
+  page.drawText('Lønarseðil ' + year, {
+    x: 200,
+    y: height - 50,
+    size: 24,
+    font: titleFont,
+    color: rgb(0, 0.53, 0.71),
+  });
 
-        // Draw company information
-        page.drawText("Company VAT Number: XYZ123", {
-            x: 30,
-            y: height - 100,
-            size: 14,
-            font: regularFont,
-        });
+  // Company Information
+  const CompinfoX = 400;
+  const CompinfoYStart = height - 100;
+  const CompinfoLineHeight = 20;
 
-        // Draw employee information
-        const infoX = 30;
-        const infoYStart = height - 140;
-        const infoLineHeight = 20;
+  const CompInfo = [
+    { label: '', value: 'C3IT' },
+    { label: '', value: 'Adressa' },
+    { label: '', value: '2300 København S' },
+    { label: '', value: 'C3@IT.DK' },
+    { label: '', value: '31676767' },
+    { label: '', value: '123456-123' },
+  ];
 
-        page.drawText(`Fyritøka: ${lonarfolk.data.Fyritoka}`, {
-            x: infoX,
-            y: height - 120,
-            size: 14,
-            font: regularFont,
-        });
+  CompInfo.forEach((info, index) => {
+    const yPos = CompinfoYStart - index * CompinfoLineHeight;
+    page.drawText(`${info.label} ${info.value}`, {
+      x: CompinfoX,
+      y: yPos,
+      size: 14,
+      font: regularFont,
+    });
+  });
 
-        const employeeInfo = [
-            { label: "Navn:", value: lonarfolk.data.Navn },
-            { label: "Býður:", value: lonarfolk.data.Bydur },
-            { label: "Bústaður:", value: lonarfolk.data.Bustadur },
-            { label: "Email:", value: lonarfolk.data.Mail },
-            { label: "Føðingardagur:", value: lonarfolk.data.Fødingardagur },
-            { label: "Phone:", value: lonarfolk.data.Phone },
-        ];
+  // Employee Information
+  const infoX = 30;
+  const infoYStart = height - 100;
+  const infoLineHeight = 20;
 
-        employeeInfo.forEach((info, index) => {
-            const yPos = infoYStart - index * infoLineHeight;
-            page.drawText(`${info.label} ${info.value}`, {
-                x: infoX,
-                y: yPos,
-                size: 14,
-                font: regularFont,
-            });
-        });
+  const employeeInfo = [
+    { label: '', value: lonarfolk.data.Navn },
+    { label: '', value: lonarfolk.data.Bydur },
+    { label: '', value: lonarfolk.data.Bustadur },
+    { label: '', value: lonarfolk.data.Mail },
+    { label: '', value: lonarfolk.data.Fødingardagur },
+    { label: '', value: lonarfolk.data.Telefon },
+  ];
 
-        // Draw salary details
-        const salaryX = 50;
-        const salaryYStart = height - 520;
-        const salaryLineHeight = 20;
+  employeeInfo.forEach((info, index) => {
+    const yPos = infoYStart - index * infoLineHeight;
+    page.drawText(`${info.label} ${info.value}`, {
+      x: infoX,
+      y: yPos,
+      size: 14,
+      font: regularFont,
+    });
+  });
 
-        page.drawText("Løn:", {
-            x: salaryX,
-            y: height - 500,
-            size: 14,
-            font: titleFont,
-        });
+  page.drawText('Frágreiðing', {
+    x: 30,
+    y: height - 400,
+    size: 14,
+    font: titleFont,
+  });
 
-        const salaryDetails = [
-            { label: "Løn:", value: lonarfolk.data.Løn },
-            { label: "Minus:", value: lonarfolk.data.Minus },
-            { label: "í alt:", value: lonarfolk.data.Total },
-        ];
+    page.drawText('Tímar', {
+    x: 330,
+    y: height - 400,
+    size: 14,
+    font: titleFont,
+  });
 
-        salaryDetails.forEach((detail, index) => {
-            const yPos = salaryYStart - index * salaryLineHeight;
-            page.drawText(`${detail.label} ${detail.value}`, {
-                x: salaryX,
-                y: yPos,
-                size: 14,
-                font: regularFont,
-            });
-        });
+    page.drawText('Løn', {
+    x: 500,
+    y: height - 400,
+    size: 14,
+    font: titleFont,
+  });
 
-        // Draw additional lines
-        const lineYStart = height - 200;
-        const lineYEnd = height - 600;
-        const lineXStart = 30;
-        const lineXEnd = width - 30;
+  // Draw additional lines
+  const lineYStart = height - 220;
+  const lineYEnd = height - 600;
+  const lineXStart = 30;
+  const lineXEnd = width - 30;
 
-        page.drawLine({
-            start: { x: lineXStart, y: lineYStart },
-            end: { x: lineXEnd, y: lineYStart },
-            thickness: 1,
-            color: rgb(0.5, 0.5, 0.5),
-        });
+  page.drawLine({
+    start: { x: lineXStart, y: lineYStart },
+    end: { x: lineXEnd, y: lineYStart },
+    thickness: 2,
+    color: rgb(0.5, 0.5, 0.5),
+  });
 
-        page.drawLine({
-            start: { x: lineXStart, y: lineYEnd },
-            end: { x: lineXEnd, y: lineYEnd },
-            thickness: 1,
-            color: rgb(0.5, 0.5, 0.5),
-        });
+  page.drawLine({
+    start: { x: lineXStart, y: 440 },
+    end: { x: lineXEnd, y: 440 },
+    thickness: 2,
+    color: rgb(0.5, 0.5, 0.5),
+  });
 
-        // Draw additional lines with description, quantity, and salary
-        const lineInfoX = 50;
-        const lineInfoYStart = height - 700;
-        const lineInfoLineHeight = 20;
+  // Draw additional lines with description, quantity, and salary
+  const lineInfoX = 30;
+  const lineInfoYStart = height - 420;
+  const lineInfoLineHeight = 20;
 
-        const lineDetails = [
-            {
-                description: "for month 01-06-2023 to 30-06-2023",
-                quantity: 1,
-                salary: 30000,
-            },
-            // Add more line details as needed
-        ];
+  const lineDetails = [
+    { description: lonarfolk.data.Desc, quantity: lonarfolk.data.Tímar, salary: lonarfolk.data.Løn },
+    // Add more line details as needed
+  ];
 
-        lineDetails.forEach((line, index) => {
-            const yPos = lineInfoYStart - index * lineInfoLineHeight;
-            page.drawText(`Description: ${line.description}`, {
-                x: lineInfoX,
-                y: yPos,
-                size: 14,
-                font: regularFont,
-            });
-            page.drawText(`Quantity: ${line.quantity}`, {
-                x: lineInfoX + 200,
-                y: yPos,
-                size: 14,
-                font: regularFont,
-            });
-            page.drawText(`Salary: ${line.salary}`, {
-                x: lineInfoX + 300,
-                y: yPos,
-                size: 14,
-                font: regularFont,
-            });
-        });
+  lineDetails.forEach((line, index) => {
+    const yPos = lineInfoYStart - index * lineInfoLineHeight;
+    page.drawText(`${line.description}`, {
+      x: lineInfoX,
+      y: yPos,
+      size: 14,
+      font: regularFont,
+    });
+    page.drawText(`${line.quantity}`, {
+      x: lineInfoX + 300,
+      y: yPos,
+      size: 14,
+      font: regularFont,
+    });
+    page.drawText(`${line.salary}`, {
+      x: lineInfoX + 450,
+      y: yPos,
+      size: 14,
+      font: regularFont,
+    });
+  });
 
-        // Save and display the PDF
-        const pdfBytes = await pdfDoc.save();
-        const pdfUrl = URL.createObjectURL(
-            new Blob([pdfBytes], { type: "application/pdf" })
-        );
-        generatedPdfUrl = pdfUrl;
-    }
+
+
+  // Feria
+  page.drawText('Rest Feria', {
+    x: 30,
+    y: 150,
+    size: 14,
+    font: titleFont,
+  });
+  page.drawLine({
+    start: { x: lineXStart, y: 140 },
+    end: { x: lineXEnd, y: 140 },
+    thickness: 2,
+    color: rgb(0.5, 0.5, 0.5),
+  });
+
+  page.drawText(lonarfolk.data.Restferia + ' dagar', {
+    x: 30,
+    y: 120,
+    size: 14,
+    font: regularFont,
+  });
+
+
+
+
+  // Save and display the PDF
+  const pdfBytes = await pdfDoc.save();
+  const pdfUrl = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
+  generatedPdfUrl = pdfUrl;
+}
+
+
 
     onMount(() => {
         return () => {
@@ -224,6 +248,7 @@
                         />
                         <label for="floatingInput">Býur</label>
                     </div>
+<<<<<<< HEAD
                     <!-- Postnummar -->
                     <div class="form-floating">
                         <input
@@ -267,6 +292,63 @@
                             data-key="Mail"
                         />
                         <label for="floatingInput">Teldupostur</label>
+=======
+                    <h2 class="input-group-heading">Lønupplýsningar</h2>
+                    <hr />
+                    <div class="sub-group">
+                        <!-- Løn Frágreiding -->
+                        <div class="form-floating">
+                            <input
+                                on:change={handleChange}
+                                type="text"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="Fyri DD-MM-YYYY til DD-MM-YYYY"
+                                value={lonarfolk.data.Desc}
+                                data-key="Desc"
+                            />
+                            <label for="floatingInput">Frágreiðing</label>
+                        </div>
+                        <!-- Løn Tímar -->
+                        <div class="form-floating">
+                            <input
+                                on:change={handleChange}
+                                type="number"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="160"
+                                value={lonarfolk.data.Tímar}
+                                data-key="Tímar"
+                            />
+                            <label for="floatingInput">Tímar</label>
+                        </div>
+                        <!-- Løn at betala -->
+                        <div class="form-floating">
+                            <input
+                                on:change={handleChange}
+                                type="text"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="3000,00"
+                                value={lonarfolk.data.Løn}
+                                data-key="Løn"
+                            />
+                            <label for="floatingInput">Løn brutto</label>
+                        </div>
+                        <!-- Feria -->
+                        <div class="form-floating">
+                            <input
+                                on:change={handleChange}
+                                type="text"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="0"
+                                value={lonarfolk.data.Restferia}
+                                data-key="Restferia"
+                            />
+                            <label for="floatingInput">Rest feria</label>
+                        </div>
+>>>>>>> c68b5de7c5ecf43374617ba33d785592b0de3b46
                     </div>
                     <!-- Telefon nummar -->
                     <div class="form-floating">
