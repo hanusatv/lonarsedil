@@ -6,16 +6,15 @@
 
     selectedRoute.set("fyritokur");
 
-    let lonarfolk;
+    let fyritoka;
 
     const promise = Fyritoka.heintaEina(params.id);
 
     async function handleChange(e) {
         let key = e.target.getAttribute("data-key");
         let value = e.target.value;
-        await Fyritoka.dagfor(params.id, { [key]: value });
-        const promise = Fyritoka.heintaEina(params.id);
-        lonarfolk = await promise;
+        const promise = await Fyritoka.dagfor(params.id, { [key]: value });
+        fyritoka = await promise;
     }
 
     function lonarfolkDelete() {
@@ -25,7 +24,7 @@
     }
 
     onMount(async () => {
-        lonarfolk = await promise; // Assign the resolved value to fyritoka
+        fyritoka = await promise; // Assign the resolved value to fyritoka
     });
 </script>
 
@@ -38,7 +37,38 @@
         <!-- Body1 -->
         <h2 class="input-group-heading">Navn</h2>
         <hr />
-        <form class="sub-group">
+        <div class="sub-group">
+            <!-- Navn -->
+            <div class="form-floating">
+                <input
+                    on:change={handleChange}
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Tinghúsvegur 1"
+                    value={fyritoka.data.Navn}
+                    data-key="Navn"
+                />
+                <label for="floatingInput">Navn</label>
+            </div>
+            <!-- V-tal -->
+            <div class="form-floating">
+                <input
+                    on:change={handleChange}
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="12345678"
+                    value={fyritoka.data.Vtal}
+                    data-key="Vtal"
+                />
+                <label for="floatingInput">V-tal</label>
+            </div>
+        </div>
+        <!-- Adressa subgroup-->
+        <h2 class="input-group-heading">Adressa</h2>
+        <hr />
+        <div class="sub-group">
             <!-- Gøta -->
             <div class="form-floating">
                 <input
@@ -47,12 +77,82 @@
                     class="form-control"
                     id="floatingInput"
                     placeholder="Tinghúsvegur 1"
-                    value={fyritoka.data.name}
+                    value={fyritoka.data.Bustadur}
                     data-key="Bustadur"
                 />
-                <label for="floatingInput">Navn</label>
+                <label for="floatingInput">Gøtunavn</label>
             </div>
-        </form>
+            <!-- Býur -->
+            <div class="form-floating">
+                <input
+                    on:change={handleChange}
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Tórshavn"
+                    value={fyritoka.data.Bydur}
+                    data-key="Bydur"
+                />
+                <label for="floatingInput">Býur</label>
+            </div>
+            <!-- Postnummar -->
+            <div class="form-floating">
+                <input
+                    on:change={handleChange}
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="100"
+                    value={fyritoka.data.PostNummar}
+                    data-key="PostNummar"
+                />
+                <label for="floatingInput">Postnummar</label>
+            </div>
+            <!-- Land -->
+            <div class="form-floating">
+                <input
+                    on:change={handleChange}
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Føroyar"
+                    value="Frøbjar"
+                    data-key="Land"
+                />
+                <label for="floatingInput">Land</label>
+            </div>
+        </div>
+        <!-- Kontakt subgroup-->
+        <h2 class="input-group-heading">Kontakt</h2>
+        <hr />
+        <div class="sub-group">
+            <!-- Teldupostur -->
+            <div class="form-floating">
+                <input
+                    on:change={handleChange}
+                    type="email"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="navn@dømi.fo"
+                    value={fyritoka.data.Mail}
+                    data-key="Mail"
+                />
+                <label for="floatingInput">Teldupostur</label>
+            </div>
+            <!-- Telefon nummar -->
+            <div class="form-floating">
+                <input
+                    on:change={handleChange}
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="311234"
+                    value={fyritoka.data.Telefon}
+                    data-key="Telefon"
+                />
+                <label for="floatingInput">Telefon nummar</label>
+            </div>
+        </div>
     {:catch error}
         <p style="color: red">{error}</p>
     {/await}
@@ -73,55 +173,6 @@
         column-gap: 2em;
         margin-bottom: 2em;
     }
-    .lontakari-info {
-        margin: 10px;
-        text-align: center;
-    }
-
-    /* Button Lonar tittleiki Start */
-    .lonar-tittleiki-dropdown,
-    .lonar-tittleiki-dropdown * {
-        position: relative;
-        box-sizing: border-box;
-        color: white;
-    }
-    .lonar-tittleiki-dropdown {
-        position: relative;
-        background-color: #2b3044;
-        border-radius: 4px;
-    }
-    .lonar-tittleiki-dropdown select {
-        background-color: #2b3044;
-        font-size: 1rem;
-        font-weight: normal;
-        max-width: 100%;
-        padding: 8px 24px 8px 10px;
-        border: none;
-        background-color: transparent;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }
-    .lonar-tittleiki-dropdown select:active,
-    .lonar-tittleiki-dropdown select:focus {
-        outline: none;
-        box-shadow: none;
-        background-color: #2b3044;
-    }
-    .lonar-tittleiki-dropdown:after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: 8px;
-        width: 0;
-        height: 0;
-        margin-top: -2px;
-        border-top: 5px solid #aaa;
-        border-right: 5px solid transparent;
-        border-left: 5px solid transparent;
-    }
-    /* Button Lonar tittleiki end */
-    /* Button sletta lønartakara Start */
 
     .button {
         --background: #2b3044;
@@ -340,13 +391,6 @@
         border: none;
     }
 
-    .left-side {
-        width: 50%;
-        padding-right: 1em;
-    }
-    .right-side {
-        width: 50%;
-    }
     @keyframes paper {
         10%,
         100% {

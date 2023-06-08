@@ -14,6 +14,7 @@ class Lontakari(BaseModel):
 
 
 class Fyritoka(BaseModel):
+    Vtal: str
     Navn: str
     Gøta: str
     Bydur: str

@@ -64,24 +64,25 @@ async def heinta_allar_fyritokir():
 
 @fyritoka.get("/fyritoka/{id}")
 async def heinta_ein_lontakara(id):
-    return serializeDict(collection.find_one({"_id": ObjectId(id)}))
+    return serializeDict(fyritokadb.find_one({"_id": ObjectId(id)}))
 
 
 # upprætta eina fyritøku
 
 
-@fyritoka.post("/fyritoka/")
-async def skapa_fyritoku(fyritoka: Fyritoka):
-    collection.insert_one(dict(fyritoka))
-    return serializeList(fyritokadb.find())
+@lontakari.post("/fyritoka/")
+async def skapa_fyritøku():
+    record = {}
+    result = fyritokadb.insert_one(record)
+    return serializeDict(fyritokadb.find_one({"_id": result.inserted_id}))
 
 
-# Broyt eina fyritøku
+# Broyt ein løntakara
 
 
-@fyritoka.put("/fyritoka/{id}")
-async def dagfør_fyritoku(id, fyritoka: Fyritoka):
-    fyritokadb.find_one_and_update({"_id": ObjectId(id)}, {"$set": dict(fyritoka)})
+@lontakari.put("/fyritoka/{id}")
+async def dagfør_lontakara(id, felt: dict):
+    fyritokadb.find_one_and_update({"_id": ObjectId(id)}, {"$set": felt})
     return serializeDict(fyritokadb.find_one({"_id": ObjectId(id)}))
 
 

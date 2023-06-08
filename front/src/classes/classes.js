@@ -35,6 +35,7 @@ class FyritokaData {
     constructor(data) {
         this.data = {
             _id: "",
+            Vtal: "",
             Navn: "",
             Gøta: "",
             Bydur: "",
