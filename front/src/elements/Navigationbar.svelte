@@ -2,7 +2,6 @@
     import { fly } from "svelte/transition";
     import { sineOut, quadOut } from "svelte/easing";
     import { selectedRoute } from "../stores/store.js";
-    import { subscribe } from "svelte/internal";
     let toggle = false;
     let selected;
     selectedRoute.subscribe((route) => {
