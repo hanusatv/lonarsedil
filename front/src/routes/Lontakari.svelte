@@ -247,61 +247,49 @@
                         />
                         <label for="floatingInput">Býur</label>
                     </div>
-                    <h2 class="input-group-heading">Lønupplýsningar</h2>
-                    <hr />
-                    <div class="sub-group">
-                        <!-- Løn Frágreiding -->
-                        <div class="form-floating">
-                            <input
-                                on:change={handleChange}
-                                type="text"
-                                class="form-control"
-                                id="floatingInput"
-                                placeholder="Fyri DD-MM-YYYY til DD-MM-YYYY"
-                                value={lonarfolk.data.Desc}
-                                data-key="Desc"
-                            />
-                            <label for="floatingInput">Frágreiðing</label>
-                        </div>
-                        <!-- Løn Tímar -->
-                        <div class="form-floating">
-                            <input
-                                on:change={handleChange}
-                                type="number"
-                                class="form-control"
-                                id="floatingInput"
-                                placeholder="160"
-                                value={lonarfolk.data.Tímar}
-                                data-key="Tímar"
-                            />
-                            <label for="floatingInput">Tímar</label>
-                        </div>
-                        <!-- Løn at betala -->
-                        <div class="form-floating">
-                            <input
-                                on:change={handleChange}
-                                type="text"
-                                class="form-control"
-                                id="floatingInput"
-                                placeholder="3000,00"
-                                value={lonarfolk.data.Løn}
-                                data-key="Løn"
-                            />
-                            <label for="floatingInput">Løn brutto</label>
-                        </div>
-                        <!-- Feria -->
-                        <div class="form-floating">
-                            <input
-                                on:change={handleChange}
-                                type="text"
-                                class="form-control"
-                                id="floatingInput"
-                                placeholder="0"
-                                value={lonarfolk.data.Restferia}
-                                data-key="Restferia"
-                            />
-                            <label for="floatingInput">Rest feria</label>
-                        </div>
+                    <!-- Postnummar -->
+                    <div class="form-floating">
+                        <input
+                            on:change={handleChange}
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="100"
+                            value={lonarfolk.data.Mail}
+                            data-key="PostNummar"
+                        />
+                        <label for="floatingInput">Postnummar</label>
+                    </div>
+                    <!-- Land -->
+                    <div class="form-floating">
+                        <input
+                            on:change={handleChange}
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="Føroyar"
+                            value="Frøbjar"
+                            data-key="Land"
+                        />
+                        <label for="floatingInput">Land</label>
+                    </div>
+                </form>
+                <!-- Body 2 -->
+                <h2 class="input-group-heading">Kontakt</h2>
+                <hr />
+                <div class="sub-group">
+                    <!-- Teldupostur -->
+                    <div class="form-floating">
+                        <input
+                            on:change={handleChange}
+                            type="email"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="navn@dømi.fo"
+                            value={lonarfolk.data.Mail}
+                            data-key="Mail"
+                        />
+                        <label for="floatingInput">Teldupostur</label>
                     </div>
                     <!-- Telefon nummar -->
                     <div class="form-floating">
@@ -316,104 +304,148 @@
                         />
                         <label for="floatingInput">Telefon nummar</label>
                     </div>
-                </form>
-            </div>
-            <h2 class="input-group-heading">Persónsupplýsingar</h2>
-            <hr />
-            <div class="sub-group">
-                <!-- Navn -->
-                <div class="form-floating">
-                    <input
-                        on:change={handleChange}
-                        type="text"
-                        class="form-control"
-                        id="floatingInput"
-                        placeholder="Petur Petersen"
-                        value={lonarfolk.data.Navn}
-                        data-key="Navn"
-                    />
-                    <label for="floatingInput">Navn</label>
                 </div>
-                <div class="form-floating">
-                    <SveltyPicker
-                        inputClasses="form-control"
-                        inputId="floatingInput"
-                        format="dd-mm-yyyy"
-                        placeholder=" "
-                        todayBtn={false}
-                        clearBtn={false}
-                    />
-                    <label for="floatingInput">Føðingardagur</label>
-                </div>
-                <div class="form-floating">
-                    <input
-                        on:change={handleChange}
-                        type="text"
-                        class="form-control"
-                        id="floatingInput"
-                        placeholder="311234"
-                        value={lonarfolk.data.Ptal}
-                        data-key="Ptal"
-                    />
-                    <label for="floatingInput">P-tal</label>
-                </div>
-                <div class="form-floating">
-                    <SveltyPicker
-                        inputClasses="form-control"
-                        inputId="floatingInput"
-                        format="dd-mm-yyyy"
-                        placeholder=" "
-                        todayBtn={false}
-                        clearBtn={false}
-                    />
-                    <label for="floatingInput">Setanardagur</label>
-                </div>
-            </div>
-            <div class="lontakari-info">
-                Slag av inntøku:<br />
-                <strong>{lonarfolk.data.Slagavinntøku}</strong>
-            </div>
-            <div class="lontakari-info">
-                Løn brutto:<br />
-                <strong>{lonarfolk.data.Løn}</strong>
-            </div>
-            <div class="lontakari-info">
-                Rest feria:<br />
-                <strong>{lonarfolk.data.Restferia} dagar</strong>
-            </div>
-            <label class="lontakari-info" for="lonar-tittleiki-dropdown"
-                >Lønar títtleiki:</label
-            >
-            <div class="lonar-tittleiki-dropdown">
-                <select>
-                    <option value="Option 1">Hvønn mánað</option>
-                    <option value="Option 2">Aðra hvørja viku</option>
-                    <option value="Option 3">Hvørja viku</option>
-                </select>
-            </div>
-            <!-- Footer -->
-            <div class="buttom-buttons-row">
-                <button on:click={lonarfolkDelete} class="button">
-                    <div class="trash">
-                        <div class="top">
-                            <div class="paper" />
-                        </div>
-                        <div class="box" />
-                        <div class="check">
-                            <svg viewBox="0 0 8 6">
-                                <polyline points="1 3.4 2.71428571 5 7 1" />
-                            </svg>
-                        </div>
+                <h2 class="input-group-heading">Persónsupplýsingar</h2>
+                <hr />
+                <div class="sub-group">
+                    <!-- Navn -->
+                    <div class="form-floating">
+                        <input
+                            on:change={handleChange}
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="Petur Petersen"
+                            value={lonarfolk.data.Navn}
+                            data-key="Navn"
+                        />
+                        <label for="floatingInput">Navn</label>
                     </div>
-                    <span>Strika løntakara</span>
-                </button>
-                <div class="button">
-                    <button
-                        on:click={generatePDF(lonarfolk)}
-                        class="generate-pdf-button"
-                    >
-                        <span>Ger PDF</span>
+                    <div class="form-floating">
+                        <SveltyPicker
+                            inputClasses="form-control"
+                            inputId="floatingInput"
+                            format="dd-mm-yyyy"
+                            placeholder=" "
+                            todayBtn={false}
+                            clearBtn={false}
+                        />
+                        <label for="floatingInput">Føðingardagur</label>
+                    </div>
+                    <div class="form-floating">
+                        <input
+                            on:change={handleChange}
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="311234"
+                            value={lonarfolk.data.Ptal}
+                            data-key="Ptal"
+                        />
+                        <label for="floatingInput">P-tal</label>
+                    </div>
+                    <div class="form-floating">
+                        <SveltyPicker
+                            inputClasses="form-control"
+                            inputId="floatingInput"
+                            format="dd-mm-yyyy"
+                            placeholder=" "
+                            todayBtn={false}
+                            clearBtn={false}
+                        />
+                        <label for="floatingInput">Setanardagur</label>
+                    </div>
+                </div>
+                <h2 class="input-group-heading">Lønupplýsningar</h2>
+                <hr />
+                <div class="sub-group">
+                    <!-- Løn Frágreiding -->
+                    <div class="form-floating">
+                        <input
+                            on:change={handleChange}
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="Fyri DD-MM-YYYY til DD-MM-YYYY"
+                            value={lonarfolk.data.Desc}
+                            data-key="Desc"
+                        />
+                        <label for="floatingInput">Frágreiðing</label>
+                    </div>
+                    <!-- Løn Tímar -->
+                    <div class="form-floating">
+                        <input
+                            on:change={handleChange}
+                            type="number"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="160"
+                            value={lonarfolk.data.Tímar}
+                            data-key="Tímar"
+                        />
+                        <label for="floatingInput">Tímar</label>
+                    </div>
+                    <!-- Løn at betala -->
+                    <div class="form-floating">
+                        <input
+                            on:change={handleChange}
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="3000,00"
+                            value={lonarfolk.data.Løn}
+                            data-key="Løn"
+                        />
+                        <label for="floatingInput">Løn brutto</label>
+                    </div>
+                    <!-- Feria -->
+                    <div class="form-floating">
+                        <input
+                            on:change={handleChange}
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="0"
+                            value={lonarfolk.data.Restferia}
+                            data-key="Restferia"
+                        />
+                        <label for="floatingInput">Rest feria</label>
+                    </div>
+                </div>
+                <label class="lontakari-info" for="lonar-tittleiki-dropdown"
+                    >Lønar títtleiki:</label
+                >
+                <div class="lonar-tittleiki-dropdown">
+                    <select>
+                        <option value="Option 1">Hvønn mánað</option>
+                        <option value="Option 2">Aðra hvørja viku</option>
+                        <option value="Option 3">Hvørja viku</option>
+                    </select>
+                </div>
+                <!-- Footer -->
+                <div class="buttom-buttons-row">
+                    <button on:click={lonarfolkDelete} class="button">
+                        <div class="trash">
+                            <div class="top">
+                                <div class="paper" />
+                            </div>
+                            <div class="box" />
+                            <div class="check">
+                                <svg viewBox="0 0 8 6">
+                                    <polyline points="1 3.4 2.71428571 5 7 1" />
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Strika løntakara</span>
                     </button>
+                    <div class="button">
+                        <button
+                            on:click={generatePDF(lonarfolk)}
+                            class="generate-pdf-button"
+                        >
+                            <span>Ger PDF</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="right-side">
