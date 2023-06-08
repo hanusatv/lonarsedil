@@ -6,15 +6,21 @@
     import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
     import { onMount } from 'svelte';
 
+    
     selectedRoute.set("lontakarar");
 
     let lonarfolk;
+
     const promise = Lonarfolk.heintaEin(params.id);
 
-    function handleChange(e) {
+    async function handleChange(e) {
         let key = e.target.getAttribute("data-key");
         let value = e.target.value;
-        Lonarfolk.dagfor(params.id, { [key]: value });
+        await Lonarfolk.dagfor(params.id, { [key]: value });
+
+        const promise = Lonarfolk.heintaEin(params.id);
+        lonarfolk = await promise;
+        await generatePDF(lonarfolk);
     }
 
     // Delete button start
@@ -197,9 +203,6 @@
     font: regularFont,
   });
 
-
-
-
   // Save and display the PDF
   const pdfBytes = await pdfDoc.save();
   const pdfUrl = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
@@ -207,6 +210,9 @@
 }
 
 
+    onMount(async () => {
+        lonarfolk = await promise; // Assign the resolved value to lonarfolk
+    });
 
     onMount(() => {
       return () => {
@@ -215,6 +221,7 @@
         }
       };
     });
+    
 </script>
 
 <main>
