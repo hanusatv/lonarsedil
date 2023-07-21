@@ -7,6 +7,7 @@
   import Lontakarar from "./routes/Lontakarar.svelte";
   import Lontakari from "./routes/Lontakari.svelte";
   import GerPdf from "./routes/GerPdf.svelte";
+  import LoginButton from "./elements/LoginButton.svelte";
 
   let routes = {
     "/": Home,
@@ -20,6 +21,7 @@
 
 <div class="header-container">
   <header>Lønarseðil</header>
+  <LoginButton />
 </div>
 <div class="columns-container">
   <Navigationbar />
