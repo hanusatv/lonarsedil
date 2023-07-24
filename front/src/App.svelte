@@ -36,12 +36,13 @@
   .header-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     height: 4em;
     width: 100%;
     background-color: var(--primary-color);
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    padding: 0 1em;
   }
 
   .columns-container {
