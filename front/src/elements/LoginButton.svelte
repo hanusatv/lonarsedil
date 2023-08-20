@@ -1,16 +1,27 @@
 <script>
     import { onDestroy, onMount, tick } from "svelte";
-    import { auth } from "../classes/firebase.js"; // import auth from firebase.js
-    import firebase from "firebase/compat/app"; // import firebase from the compat version
-    import * as firebaseui from "firebaseui"; // import the entire firebaseui
-    import "firebaseui/dist/firebaseui.css"; // import the firebase css
+    import { onAuthStateChanged } from "firebase/auth";
+    import { auth } from "../classes/firebase.js";
+    import firebase from "firebase/compat/app";
+    import * as firebaseui from "firebaseui";
+    import "firebaseui/dist/firebaseui.css";
 
     let ui;
     let showModal = false;
 
-    // FirebaseUI config.
+    // Create a Svelte writable store for signedIn
+    let signedIn;
+
     const uiConfig = {
-        signInSuccessUrl: "localhost:5173/",
+        signInFlow: "popup",
+        signInSuccessUrl: "http://localhost:5173/",
+        callbacks: {
+            signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+                // User successfully signed in.
+                var credential = authResult.credential;
+                return true;
+            },
+        },
         signInOptions: [
             {
                 provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -25,6 +36,15 @@
         ui = new firebaseui.auth.AuthUI(auth);
     });
 
+    onAuthStateChanged(auth, (user) => {
+        signedIn = !!user;
+        if (user) {
+            console.log("Logged in as: " + user.displayName);
+        } else {
+            console.log("Logged out");
+        }
+    });
+
     async function runLogInModal() {
         showModal = true;
         await tick();
@@ -33,10 +53,16 @@
 
     onDestroy(() => {
         ui.delete();
+        showModal = false;
     });
 </script>
 
-<button on:click={runLogInModal} class="button">Logga á</button>
+<!-- Subscribe to the signedIn store -->
+{#if signedIn}
+    <button on:click={() => auth.signOut()} class="button">Logga út</button>
+{:else}
+    <button on:click={runLogInModal} class="button">Logga á</button>
+{/if}
 
 {#if showModal}
     <div id="firebaseui-auth-container" on:click={() => (showModal = false)}>
