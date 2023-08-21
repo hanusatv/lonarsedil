@@ -10,6 +10,8 @@
   --background-color: #282933;
   --primary-color: #363644;
   --lines-color: #acadc5;
+  --button-color: #4a4a60;
+  --button-hover-color: #5a5a70;
   --hover-color: #bbbddd;
   --green-color: #466a50;
   --hover-green-color: #577c61;
@@ -53,12 +55,26 @@ h1 {
 }
 
 button {
+  background-color: var(--button-color);
   border: 1px solid transparent;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: border-color 0.25s;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  --shadow-x: 0;
+  --shadow-y: 2px;
+  --shadow-blur: 5px;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-color);
+  transition: 0.25s;
+}
+
+button:hover {
+  background-color: var(--button-hover-color);
+  --shadow-y: 5px;
+  --shadow-blur: 9px;
 }
 
 

@@ -6,7 +6,6 @@
     import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
     import { onMount } from "svelte";
 
-    
     selectedRoute.set("lontakarar");
 
     let lonarfolk;
@@ -199,33 +198,34 @@
             font: regularFont,
         });
 
-  // Feria
-  page.drawText('Rest Feria', {
-    x: 30,
-    y: 150,
-    size: 14,
-    font: titleFont,
-  });
-  page.drawLine({
-    start: { x: lineXStart, y: 140 },
-    end: { x: lineXEnd, y: 140 },
-    thickness: 2,
-    color: rgb(0.5, 0.5, 0.5),
-  });
+        // Feria
+        page.drawText("Rest Feria", {
+            x: 30,
+            y: 150,
+            size: 14,
+            font: titleFont,
+        });
+        page.drawLine({
+            start: { x: lineXStart, y: 140 },
+            end: { x: lineXEnd, y: 140 },
+            thickness: 2,
+            color: rgb(0.5, 0.5, 0.5),
+        });
 
-  page.drawText(lonarfolk.data.Restferia + ' dagar', {
-    x: 30,
-    y: 120,
-    size: 14,
-    font: regularFont,
-  });
+        page.drawText(lonarfolk.data.Restferia + " dagar", {
+            x: 30,
+            y: 120,
+            size: 14,
+            font: regularFont,
+        });
 
-  // Save and display the PDF
-  const pdfBytes = await pdfDoc.save();
-  const pdfUrl = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
-  generatedPdfUrl = pdfUrl;
-}
-
+        // Save and display the PDF
+        const pdfBytes = await pdfDoc.save();
+        const pdfUrl = URL.createObjectURL(
+            new Blob([pdfBytes], { type: "application/pdf" })
+        );
+        generatedPdfUrl = pdfUrl;
+    }
 
     onMount(async () => {
         lonarfolk = await promise; // Assign the resolved value to lonarfolk
@@ -238,7 +238,6 @@
             }
         };
     });
-    
 </script>
 
 <main>
@@ -252,7 +251,7 @@
                 <!-- Body1 -->
                 <h2 class="input-group-heading">Adressa</h2>
                 <hr />
-                <form class="sub-group">
+                <div class="sub-group">
                     <!-- Gøta -->
                     <div class="form-floating">
                         <input
@@ -305,7 +304,7 @@
                         />
                         <label for="floatingInput">Land</label>
                     </div>
-                </form>
+                </div>
                 <!-- Body 2 -->
                 <h2 class="input-group-heading">Kontakt</h2>
                 <hr />

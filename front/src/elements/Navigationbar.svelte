@@ -15,9 +15,9 @@
             caption: "Løntakarar",
         },
         {
-            name: "fyritoka",
+            name: "fyritokur",
             icon: "/src/assets/icons/company.svg",
-            caption: "Fyritøka",
+            caption: "Fyritøkur",
         },
     ];
 
