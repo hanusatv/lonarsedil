@@ -5,6 +5,7 @@
     import firebase from "firebase/compat/app";
     import * as firebaseui from "firebaseui";
     import "firebaseui/dist/firebaseui.css";
+    import Cookies from "js-cookie";
 
     let ui;
     let showModal = false;
@@ -18,7 +19,24 @@
         callbacks: {
             signInSuccessWithAuthResult: function (authResult, redirectUrl) {
                 // User successfully signed in.
-                var credential = authResult.credential;
+                const user = authResult.user;
+                const token = authResult.credential.accessToken;
+
+                // Set the Firebase JWT as a cookie
+                if (authResult.user.getIdToken) {
+                    authResult.user
+                        .getIdToken()
+                        .then((idToken) => {
+                            Cookies.set("firebaseIdToken", idToken, {
+                                expires: 7,
+                                path: "/",
+                            }); // Adjust cookie details as needed
+                        })
+                        .catch((error) => {
+                            console.error("Error getting Firebase JWT:", error);
+                        });
+                }
+
                 return true;
             },
         },
@@ -65,7 +83,11 @@
 {/if}
 
 {#if showModal}
-    <div id="firebaseui-auth-container" on:click={() => (showModal = false)}>
+    <div
+        id="firebaseui-auth-container"
+        on:click={() => (showModal = false)}
+        on:keypress={() => (showModal = false)}
+    >
         <div id="firebaseui-auth-content" />
     </div>
 {/if}
